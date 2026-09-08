@@ -489,57 +489,6 @@
   if (localStorage.getItem(LS_KEY) && thumbBtn) thumbBtn.classList.add('is-done');
 
   /* =======================================================
-     7 bis. LECTEUR DU PROGRAMME (PDF)
-     ======================================================= */
-  var lecteur = $('#lecteur');
-  if (lecteur) {
-    var cadre = $('#lecteurCadre');
-    var source = cadre ? cadre.getAttribute('data-src') || null : null;
-    var dernierFocus = null;
-
-    // Les navigateurs mobiles n'affichent pas les PDF dans une iframe :
-    // on bascule alors sur le bouton « ouvrir dans un nouvel onglet ».
-    var inlinePossible = !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-    function ouvrirLecteur() {
-      dernierFocus = document.activeElement;
-      lecteur.hidden = false;
-      lecteur.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('lecteur-ouvert');
-      if (inlinePossible && cadre && cadre.src === 'about:blank') {
-        var url = $('a[download]', lecteur);
-        if (url) cadre.src = url.getAttribute('href') + '#view=FitH';
-      } else if (!inlinePossible) {
-        lecteur.classList.add('sans-inline');
-      }
-      var f = $('.lecteur__fermer', lecteur);
-      if (f) f.focus();
-    }
-
-    function fermerLecteur() {
-      lecteur.hidden = true;
-      lecteur.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('lecteur-ouvert');
-      if (dernierFocus && dernierFocus.focus) dernierFocus.focus();
-    }
-
-    ['#ouvrirProgramme', '#ouvrirProgrammeMobile'].forEach(function (sel) {
-      var b = $(sel);
-      if (b) b.addEventListener('click', function () {
-        if (menu && !menu.hidden) { menu.hidden = true; burger.setAttribute('aria-expanded', 'false'); }
-        ouvrirLecteur();
-      });
-    });
-
-    $$('[data-fermer]', lecteur).forEach(function (el) {
-      el.addEventListener('click', fermerLecteur);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !lecteur.hidden) fermerLecteur();
-    });
-  }
-
-  /* =======================================================
      8. FORMULAIRE
      ======================================================= */
   var form = $('#supportForm'), msg = $('#formMsg'), submitBtn = $('#submitBtn');

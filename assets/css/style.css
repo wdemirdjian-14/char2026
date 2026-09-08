@@ -96,7 +96,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 
 /* ---------- NAV ---------- */
 .nav{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:110;
-  display:flex;align-items:center;gap:14px;padding:0 var(--pad);
+  display:flex;align-items:center;gap:10px;flex-wrap:nowrap;padding:0 var(--pad);
   padding-left:max(var(--pad),env(safe-area-inset-left));
   padding-right:max(var(--pad),env(safe-area-inset-right))}
 .nav::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;
@@ -104,7 +104,8 @@ ul,ol{margin:0;padding:0;list-style:none}
   -webkit-backdrop-filter:saturate(180%) blur(18px);
   border-bottom:1px solid rgba(255,255,255,.08);transition:opacity .45s var(--ease)}
 .nav.is-stuck::before{opacity:1}
-.nav__brand{display:flex;align-items:center;gap:9px;margin-right:auto}
+.nav__brand{display:flex;align-items:center;gap:9px;flex:0 0 auto;min-width:0}
+.nav__brand:last-of-type{margin-right:auto}
 .nav__brandtxt{font-family:var(--f-title);font-weight:700;font-size:11.5px;line-height:1.15;
   text-transform:uppercase;letter-spacing:.05em;color:var(--blanc);opacity:.85}
 .nav__links{display:none}
@@ -556,7 +557,7 @@ ul,ol{margin:0;padding:0;list-style:none}
   .pillars{grid-template-columns:repeat(4,1fr)}
   .pillar{transition:background .5s}
   .pillar:hover{background:rgba(255,194,32,.1)}
-  .footer__grid{grid-template-columns:repeat(4,1fr)}
+  .footer__grid{grid-template-columns:repeat(3,1fr)}
 }
 
 /* Écrans courts (petits téléphones en hauteur) */
@@ -596,49 +597,27 @@ ul,ol{margin:0;padding:0;list-style:none}
 }
 
 /* =========================================================
-   PROGRAMME — bouton de la barre haute et lecteur PDF
+   PROGRAMME — lien direct à côté du logo
    ========================================================= */
-.ico-doc{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.btn--prog{display:none;background:rgba(255,255,255,.1);color:var(--blanc);
-  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22);padding:10px 16px;min-height:44px;font-size:14px}
-.btn--fin-clair{background:transparent;color:var(--noir);box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.18)}
-.mobile-menu__prog{display:block;width:100%;text-align:left;background:none;border:0;cursor:pointer;
-  color:var(--blanc);font-family:var(--f-title);font-size:28px;font-weight:800;text-transform:uppercase;padding:11px 0}
-
-.lecteur{position:fixed;inset:0;z-index:150;display:flex;align-items:flex-end;justify-content:center}
-.lecteur__voile{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);
-  animation:voileIn .3s var(--ease)}
-@keyframes voileIn{from{opacity:0}}
-.lecteur__boite{position:relative;width:100%;max-width:1000px;height:94svh;display:flex;flex-direction:column;
-  background:var(--noir-2);border-radius:20px 20px 0 0;overflow:hidden;
-  box-shadow:0 -20px 60px rgba(0,0,0,.6);animation:boiteIn .45s var(--ease)}
-@keyframes boiteIn{from{transform:translateY(40px);opacity:0}}
-.lecteur__tete{display:flex;align-items:flex-start;gap:12px;padding:16px 18px;
-  border-bottom:1px solid rgba(255,255,255,.1);background:var(--noir)}
-.lecteur__tete h2{font-size:21px;color:var(--blanc);margin:0}
-.lecteur__tete p{margin:3px 0 0;font-size:12.5px;color:rgba(255,255,255,.5)}
-.lecteur__fermer{margin-left:auto;flex:0 0 auto;width:40px;height:40px;border:0;border-radius:50%;cursor:pointer;
-  background:rgba(255,255,255,.1);color:var(--blanc);font-size:17px;line-height:1}
-.lecteur__fermer:active{transform:scale(.94)}
-.lecteur__vue{position:relative;flex:1;background:#3A3A3E;overflow:auto;-webkit-overflow-scrolling:touch}
-.lecteur__vue iframe{width:100%;height:100%;border:0;display:block}
-.lecteur__repli{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;
-  gap:14px;padding:30px 22px;text-align:center;color:rgba(255,255,255,.7)}
-.lecteur__repli svg{width:44px;height:44px;fill:none;stroke:var(--jaune);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.lecteur__repli p{margin:0;font-size:15px}
-.lecteur.sans-inline .lecteur__vue iframe{display:none}
-.lecteur.sans-inline .lecteur__repli{display:flex}
-.lecteur__pied{display:flex;flex-direction:column;gap:9px;padding:14px 18px calc(14px + env(safe-area-inset-bottom));
-  background:var(--blanc);border-top:1px solid rgba(0,0,0,.08)}
-.lecteur__pied .btn{width:100%}
-body.lecteur-ouvert{overflow:hidden}
+.nav__prog{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;margin-right:auto;
+  white-space:nowrap;padding:8px 13px;border-radius:999px;
+  background:rgba(255,255,255,.09);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);
+  color:var(--blanc);font-size:12.5px;font-weight:700;letter-spacing:.01em;
+  transition:background .3s,box-shadow .3s,transform .3s var(--ease)}
+.nav__prog svg{width:15px;height:15px;flex:0 0 auto;fill:none;stroke:var(--jaune);
+  stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nav__prog:active{transform:scale(.97)}
+.mobile-menu__prog{display:block;color:var(--blanc);font-family:var(--f-title);
+  font-size:28px;font-weight:800;text-transform:uppercase;padding:11px 0}
 
 @media (min-width:760px){
-  .btn--prog{display:inline-flex}
-  .lecteur{align-items:center;padding:24px}
-  .lecteur__boite{height:min(88svh,900px);border-radius:20px}
-  .lecteur__tete{padding:18px 22px}
-  .lecteur__tete h2{font-size:25px}
-  .lecteur__pied{flex-direction:row;justify-content:flex-end;padding:14px 22px}
-  .lecteur__pied .btn{width:auto}
+  .nav__prog{font-size:13.5px;padding:9px 16px;gap:8px}
+  .nav__prog svg{width:17px;height:17px}
+}
+@media (min-width:1100px){
+  .nav__prog:hover{background:rgba(255,194,32,.16);box-shadow:inset 0 0 0 1px rgba(255,194,32,.5)}
+}
+/* sur les petits écrans, le nom du club cède la place au lien programme */
+@media (max-width:560px){
+  .nav__brandtxt{display:none}
 }

@@ -22,6 +22,10 @@ Conçu **mobile first**.
   en-tête `%PDF-` *et* type MIME, un fichier déguisé est refusé) et génération du
   QR code du site, téléchargeable en PNG ou imprimable en affichette A4.
 
+Le programme s'ouvre par un **lien direct** vers le PDF, placé à côté du logo
+dans la barre du haut (et dans le menu mobile). Pas de fenêtre intermédiaire :
+le navigateur ouvre le fichier avec son propre lecteur.
+
 Le PDF est envoyé depuis l'admin, donc **exclu du dépôt et protégé pendant le
 rsync** : un déploiement ne l'efface pas. Le bouton « Le programme » n'apparaît
 dans la barre du haut que si un PDF est effectivement en ligne.

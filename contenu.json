@@ -20,11 +20,7 @@
   },
   "programme": {
     "bouton": "Le programme",
-    "titre_lecteur": "Notre programme pour le CHAR",
-    "sous_titre": "10 priorités pour l'avenir du club",
-    "fichier": "assets/programme/programme-char-2026.pdf",
-    "telecharger": "Télécharger le PDF",
-    "ouvrir_onglet": "Ouvrir dans un nouvel onglet"
+    "fichier": "assets/programme/programme-char-2026.pdf"
   },
   "compteur": {
     "objectif": 500,
@@ -211,8 +207,6 @@
   "pied": {
     "base": "Club de Hockey Amateur de Rouen<br>Élections — 3 octobre 2026",
     "email": "ensemblepourlechar@gmail.com",
-    "programme_url": "https://bit.ly/CHAR-2026",
-    "programme_libelle": "bit.ly/CHAR-2026",
     "liste": "« Ensemble, dans le respect et l'exigence »<br>portée par Pierre Dehaen",
     "mentions": "© 2026 — Liste « Ensemble, dans le respect et l'exigence ». Site non officiel du club, publié dans le cadre de la campagne électorale."
   }

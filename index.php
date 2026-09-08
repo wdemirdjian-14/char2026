@@ -32,7 +32,7 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=3">
+<link rel="stylesheet" href="assets/css/style.css?v=<?= @filemtime(__DIR__ . '/assets/css/style.css') ?>">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230A0A0A'/><text x='50' y='72' font-size='58' font-family='Arial Black,Arial' font-weight='900' text-anchor='middle' fill='%23FFC220'>C</text></svg>">
 <script>window.CHAR_OBJECTIF = <?= (int)(cl('compteur')['objectif'] ?? 500) ?>;</script>
 </head>
@@ -43,18 +43,18 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
     <span class="shield shield--sm" aria-hidden="true"><span class="shield__puck"></span><b><?= e(c('marque.sigle')) ?></b></span>
     <span class="nav__brandtxt"><?= c('marque.nom') ?></span>
   </a>
+  <?php if ($programmeDispo): ?>
+  <a class="nav__prog" href="<?= e($fichierProgramme) ?>" target="_blank" rel="noopener" data-suivi="programme-direct">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+    <span><?= e(c('programme.bouton')) ?></span>
+  </a>
+  <?php endif; ?>
   <nav class="nav__links" aria-label="Navigation principale">
     <a href="#engagement">Engagement</a>
     <a href="#valeurs">Valeurs</a>
     <a href="#projet">Le projet</a>
     <a href="#equipe">L'équipe</a>
   </nav>
-  <?php if ($programmeDispo): ?>
-  <button type="button" class="btn btn--prog" id="ouvrirProgramme" data-suivi="ouvrir-programme">
-    <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-doc"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
-    <span><?= e(c('programme.bouton')) ?></span>
-  </button>
-  <?php endif; ?>
   <a href="#soutien" class="btn btn--nav" data-suivi="cta-nav">
     <svg class="ico-thumb" viewBox="0 0 24 24" aria-hidden="true"><?= $POUCE ?></svg>
     Je soutiens
@@ -67,7 +67,7 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
   <a href="#valeurs">Valeurs</a>
   <a href="#projet">Le projet</a>
   <a href="#equipe">L'équipe</a>
-  <?php if ($programmeDispo): ?><button type="button" class="mobile-menu__prog" id="ouvrirProgrammeMobile" data-suivi="ouvrir-programme-menu">📄 <?= e(c('programme.bouton')) ?></button><?php endif; ?>
+  <?php if ($programmeDispo): ?><a class="mobile-menu__prog" href="<?= e($fichierProgramme) ?>" target="_blank" rel="noopener" data-suivi="programme-direct-menu">📄 <?= e(c('programme.bouton')) ?></a><?php endif; ?>
   <a href="#soutien" class="mobile-menu__cta" data-suivi="cta-menu">👍 Je soutiens</a>
 </div>
 
@@ -344,10 +344,6 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
       <a href="mailto:<?= e(c('pied.email')) ?>" data-suivi="clic-email"><?= e(c('pied.email')) ?></a>
     </div>
     <div>
-      <p class="footer__h">Le programme</p>
-      <a href="<?= e(c('pied.programme_url')) ?>" target="_blank" rel="noopener" data-suivi="clic-programme"><?= e(c('pied.programme_libelle')) ?></a>
-    </div>
-    <div>
       <p class="footer__h">Liste</p>
       <p class="footer__base"><?= c('pied.liste') ?></p>
     </div>
@@ -366,40 +362,8 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
   </div>
 </div>
 
-<?php if ($programmeDispo): ?>
-<div class="lecteur" id="lecteur" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lecteurTitre">
-  <div class="lecteur__voile" data-fermer></div>
-  <div class="lecteur__boite">
-    <header class="lecteur__tete">
-      <div>
-        <h2 id="lecteurTitre"><?= e(c('programme.titre_lecteur')) ?></h2>
-        <p><?= e(c('programme.sous_titre')) ?></p>
-      </div>
-      <button type="button" class="lecteur__fermer" data-fermer aria-label="Fermer le programme">✕</button>
-    </header>
-
-    <div class="lecteur__vue">
-      <iframe id="lecteurCadre" title="<?= e(c('programme.titre_lecteur')) ?>" src="about:blank" loading="lazy"></iframe>
-      <div class="lecteur__repli" id="lecteurRepli">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/></svg>
-        <p>Votre navigateur n'affiche pas les PDF directement.</p>
-        <a class="btn btn--primary" href="<?= e($fichierProgramme) ?>" target="_blank" rel="noopener" data-suivi="programme-onglet"><?= e(c('programme.ouvrir_onglet')) ?></a>
-      </div>
-    </div>
-
-    <footer class="lecteur__pied">
-      <a class="btn btn--primary" href="<?= e($fichierProgramme) ?>" download data-suivi="programme-telecharger">
-        <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-doc"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>
-        <?= e(c('programme.telecharger')) ?>
-      </a>
-      <a class="btn btn--fin-clair" href="<?= e($fichierProgramme) ?>" target="_blank" rel="noopener" data-suivi="programme-onglet"><?= e(c('programme.ouvrir_onglet')) ?></a>
-    </footer>
-  </div>
-</div>
-<?php endif; ?>
-
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="assets/js/main.js?v=3" defer></script>
+<script src="assets/js/main.js?v=<?= @filemtime(__DIR__ . '/assets/js/main.js') ?>" defer></script>
 </body>
 </html>
