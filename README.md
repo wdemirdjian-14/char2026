@@ -6,6 +6,28 @@ Liste « Ensemble, dans le respect et l'exigence », portée par Pierre Dehaen.
 Site statique + une petite API PHP pour le compteur de soutiens et la collecte d'e-mails.
 Conçu **mobile first**.
 
+## Domaines
+
+Le site est indépendant du nom de domaine : aucun n'est codé en dur, tout se
+déduit de `HTTP_HOST` (le QR code de l'admin s'adapte donc tout seul).
+
+- **En service** : `char2026.walautao.fr`
+- **À venir** : `char2026.fr` — acheté, mais **pas encore délégué dans la zone
+  .fr** au 8 septembre 2026. Le registre ne renvoie aucun serveur de noms, ce
+  n'est donc pas un délai de propagation.
+
+Un bloc nginx d'attente (`deploiement/nginx-char2026fr-attente.conf`) est déjà
+en place : dès que le DNS répondra, `char2026.fr` renverra vers le site et
+servira les défis ACME. Pour la bascule complète (certificat + service sur les
+trois adresses), lancer sur le VPS :
+
+```bash
+bash deploiement/activer-char2026-fr.sh
+```
+
+Le script refuse de s'exécuter tant que le DNS ne pointe pas sur le serveur, et
+restaure la configuration si nginx rejette le résultat.
+
 ## Espace d'administration
 
 `https://char2026.walautao.fr/admin/` — trois onglets :
