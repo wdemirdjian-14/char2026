@@ -35,6 +35,24 @@ Sécurité : mot de passe stocké en empreinte bcrypt (jamais en clair), session
 les envois, 5 tentatives de connexion par quart d'heure, déconnexion après 2 h
 d'inactivité, nettoyage du HTML saisi (les balises exécutables sont retirées).
 
+## Son
+
+La corne de but des Dragons (`assets/son/goal-horn.mp3`, 29 s) se lance à
+l'ouverture du site et rejoue à chaque nouveau soutien enregistré — un but.
+
+Deux points à connaître :
+
+- **Les navigateurs interdisent la lecture audio automatique.** Le premier
+  essai échoue presque toujours ; le script se rabat alors sur la première
+  interaction du visiteur (clic, appui, défilement). En pratique le son démarre
+  au premier geste, pas au chargement.
+- Un bouton haut-parleur dans la barre du haut coupe le son. Le choix est
+  mémorisé, et **si le son est coupé le MP3 n'est pas téléchargé du tout**
+  (`preload="none"`) : aucun coût pour ces visiteurs.
+
+Tout se règle depuis l'admin, onglet « Textes du site », bloc *Son* :
+activation, fichier et volume (35 % par défaut).
+
 ## Contenu éditable
 
 Tous les textes vivent dans `contenu.json`, rendu côté serveur par `index.php`.

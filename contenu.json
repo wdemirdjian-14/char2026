@@ -22,8 +22,15 @@
     "bouton": "Le programme",
     "fichier": "assets/programme/programme-char-2026.pdf"
   },
+  "son": {
+    "actif": true,
+    "fichier": "assets/son/goal-horn.mp3",
+    "volume": 35,
+    "libelle_activer": "Activer le son",
+    "libelle_couper": "Couper le son"
+  },
   "compteur": {
-    "objectif": 500,
+    "objectif": 300,
     "libelle": "Soutiens",
     "periode": "1<sup>re</sup> période",
     "direct": "En direct",

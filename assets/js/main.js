@@ -489,6 +489,67 @@
   if (localStorage.getItem(LS_KEY) && thumbBtn) thumbBtn.classList.add('is-done');
 
   /* =======================================================
+     7 bis. SON D'AMBIANCE (corne de but)
+     Les navigateurs interdisent la lecture audio tant que le
+     visiteur n'a pas interagi : on tente au chargement, puis
+     on se rabat sur le premier clic, appui ou défilement.
+     ======================================================= */
+  var CLE_SON = 'char2026_son';
+  var audio = $('#ambiance');
+  var btnSon = $('#btnSon');
+  var sonCoupe = localStorage.getItem(CLE_SON) === 'coupe';
+
+  function majBoutonSon() {
+    if (!btnSon) return;
+    btnSon.setAttribute('aria-pressed', sonCoupe ? 'false' : 'true');
+    btnSon.setAttribute('aria-label', sonCoupe ? btnSon.dataset.activer : btnSon.dataset.couper);
+    if (sonCoupe) btnSon.classList.remove('joue');
+  }
+
+  function jouerSon() {
+    if (!audio || sonCoupe) return Promise.reject();
+    audio.volume = Math.min(1, Math.max(0, (parseInt(audio.dataset.volume, 10) || 35) / 100));
+    audio.currentTime = 0;
+    var p = audio.play();
+    return p && p.then ? p : Promise.resolve();
+  }
+
+  if (audio && btnSon) {
+    majBoutonSon();
+
+    audio.addEventListener('playing', function () { btnSon.classList.add('joue'); });
+    audio.addEventListener('ended',   function () { btnSon.classList.remove('joue'); });
+    audio.addEventListener('pause',   function () { btnSon.classList.remove('joue'); });
+
+    // 1. tentative immédiate ; 2. repli sur la première interaction
+    var armer = function () {
+      var lancer = function () {
+        jouerSon().catch(function () {});
+        retirer();
+      };
+      var retirer = function () {
+        ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (ev) {
+          window.removeEventListener(ev, lancer, true);
+        });
+      };
+      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (ev) {
+        window.addEventListener(ev, lancer, { capture: true, once: false, passive: true });
+      });
+    };
+    if (!sonCoupe) jouerSon().catch(armer);
+
+    btnSon.addEventListener('click', function (e) {
+      e.stopPropagation();
+      sonCoupe = !sonCoupe;
+      localStorage.setItem(CLE_SON, sonCoupe ? 'coupe' : 'actif');
+      majBoutonSon();
+      if (sonCoupe) { audio.pause(); }
+      else { jouerSon().catch(function () {}); }
+      suivre({ t: 'clic', id: sonCoupe ? 'son-coupe' : 'son-actif' });
+    });
+  }
+
+  /* =======================================================
      8. FORMULAIRE
      ======================================================= */
   var form = $('#supportForm'), msg = $('#formMsg'), submitBtn = $('#submitBtn');
@@ -568,6 +629,7 @@
     if (resp.recent) renderPeople(resp.recent);
     var big = $('#thumbBig');
     if (big) { big.classList.remove('is-pop'); void big.offsetWidth; big.classList.add('is-pop'); burst(big, 14); }
+    if (!resp.already && typeof jouerSon === 'function') jouerSon().catch(function () {});
     if (thumbBtn) thumbBtn.classList.add('is-done');
     form.reset();
     $('span', submitBtn).textContent = 'Soutien enregistré ✓';

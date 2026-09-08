@@ -59,6 +59,14 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
     <svg class="ico-thumb" viewBox="0 0 24 24" aria-hidden="true"><?= $POUCE ?></svg>
     Je soutiens
   </a>
+  <?php if (cl('son')['actif'] ?? false): ?>
+  <button class="nav__son" id="btnSon" type="button"
+          aria-label="<?= e(c('son.libelle_couper')) ?>" aria-pressed="true"
+          data-activer="<?= e(c('son.libelle_activer')) ?>" data-couper="<?= e(c('son.libelle_couper')) ?>">
+    <svg class="son--on" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>
+    <svg class="son--off" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="m17 9 4 6m0-6-4 6"/></svg>
+  </button>
+  <?php endif; ?>
   <button class="nav__burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 
@@ -361,6 +369,12 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
     </div>
   </div>
 </div>
+
+<?php if (cl('son')['actif'] ?? false): ?>
+<audio id="ambiance" preload="none" playsinline
+       src="<?= e(c('son.fichier')) ?>"
+       data-volume="<?= (int)(cl('son')['volume'] ?? 35) ?>"></audio>
+<?php endif; ?>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
