@@ -111,6 +111,7 @@ $libelles = [
   'rgpd' => 'Mention RGPD', 'profils' => 'Choix du menu « Vous êtes »',
   'membres' => 'Les candidats', 'nom' => 'Nom affiché sous la photo',
   'photo' => 'Chemin de la photo', 'roles' => 'Fonctions (en filigrane sur la photo)',
+  'phrase' => 'Le mot du candidat (apparaît sur la photo au défilement ou au clic)',
   'base' => 'Bloc de gauche', 'email' => 'Adresse e-mail de contact',
   'programme_url' => 'Lien du programme', 'programme_libelle' => 'Libellé du lien',
   'liste' => 'Bloc « Liste »', 'mentions' => 'Mentions légales',

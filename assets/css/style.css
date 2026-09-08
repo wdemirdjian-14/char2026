@@ -710,3 +710,37 @@ ul,ol{margin:0;padding:0;list-style:none}
 @media (prefers-reduced-motion:reduce){
   .membre{opacity:1!important;transform:none!important;filter:none!important}
 }
+
+/* --- Le mot du candidat : apparaît au défilement, épinglé au clic --- */
+.membre--phrase .membre__cadre{cursor:pointer}
+.membre__phrase{position:absolute;inset:0;margin:0;display:flex;align-items:center;
+  padding:16px 15px;background:linear-gradient(160deg,rgba(10,10,12,.94),rgba(20,16,4,.96));
+  opacity:var(--pv,0);pointer-events:none;
+  transition:opacity .45s var(--ease)}
+.membre__phrase p{margin:0;font-size:11.5px;line-height:1.5;color:rgba(255,255,255,.94);
+  font-style:italic;
+  transform:translateY(calc((1 - var(--pv,0)) * 10px));
+  transition:transform .5s var(--ease)}
+.membre__phrase p::before{content:"« ";color:var(--jaune);font-style:normal;font-weight:700}
+.membre__phrase p::after{content:" »";color:var(--jaune);font-style:normal;font-weight:700}
+/* la fonction s'efface quand le mot apparaît */
+.membre--phrase .membre__roles,
+.membre--phrase .membre__voile{opacity:calc(1 - var(--pv,0));transition:opacity .4s var(--ease)}
+/* pastille discrète indiquant qu'il y a un mot à lire */
+.membre--phrase .membre__cadre::after{content:"";position:absolute;right:9px;top:9px;
+  width:8px;height:8px;border-radius:50%;background:var(--jaune);
+  box-shadow:0 0 0 3px rgba(255,194,32,.25);
+  opacity:calc(1 - var(--pv,0));transition:opacity .4s var(--ease)}
+.membre--phrase:focus-visible{outline:2px solid var(--jaune);outline-offset:4px;border-radius:18px}
+.membre--tete .membre__phrase{padding:22px 24px}
+.membre--tete .membre__phrase p{font-size:15px;line-height:1.55}
+@media (min-width:600px){ .membre__phrase p{font-size:12.5px} }
+@media (min-width:900px){
+  .membre__phrase{padding:18px 17px}
+  .membre__phrase p{font-size:13px}
+  .membre--tete .membre__phrase p{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){
+  .membre__phrase{opacity:1;position:static;background:rgba(10,10,12,.9)}
+  .membre--phrase .membre__roles,.membre--phrase .membre__voile{opacity:1}
+}

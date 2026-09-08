@@ -169,7 +169,16 @@
   decalerPortraits();
   window.addEventListener('resize', decalerPortraits);
 
+  /* Le mot du candidat se dévoile quand sa carte est bien dans l'écran,
+     puis s'efface quand elle en sort. Un clic (ou Entrée) l'épingle. */
+  function palier(x, a, b) {           // transition douce entre a et b
+    var t = clamp((x - a) / (b - a), 0, 1);
+    return t * t * (3 - 2 * t);
+  }
+
   portraits.forEach(function (el) {
+    var aPhrase = el.classList.contains('membre--phrase');
+
     addScene(el, 'through', function (p) {
       var e = clamp((p - 0.04 - (el.__retard || 0)) / 0.26, 0, 1);
       e = 1 - Math.pow(1 - e, 3);
@@ -177,6 +186,23 @@
       el.style.setProperty('--my', ((1 - e) * 46).toFixed(1) + 'px');
       el.style.setProperty('--ms', (0.9 + e * 0.1).toFixed(4));
       el.style.setProperty('--mb', ((1 - e) * 9).toFixed(2));
+
+      if (!aPhrase) return;
+      var pv = el.__epinglee ? 1 : palier(p, 0.36, 0.50) * (1 - palier(p, 0.70, 0.84));
+      el.style.setProperty('--pv', pv.toFixed(3));
+    });
+
+    if (!aPhrase) return;
+
+    function basculer() {
+      el.__epinglee = !el.__epinglee;
+      el.setAttribute('aria-expanded', el.__epinglee ? 'true' : 'false');
+      if (el.__epinglee) el.style.setProperty('--pv', '1');
+      suivre({ t: 'clic', id: 'mot-candidat' });
+    }
+    el.addEventListener('click', basculer);
+    el.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); basculer(); }
     });
   });
 

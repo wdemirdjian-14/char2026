@@ -280,8 +280,10 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
         $nom = (string)($m['nom'] ?? '');
         $photo = (string)($m['photo'] ?? '');
         $roles = is_array($m['roles'] ?? null) ? $m['roles'] : [];
+        $phrase = trim((string)($m['phrase'] ?? ''));
         if ($nom === '') continue; ?>
-      <article class="membre<?= $i === 0 ? ' membre--tete' : '' ?>" data-scene="membre">
+      <article class="membre<?= $i === 0 ? ' membre--tete' : '' ?><?= $phrase !== '' ? ' membre--phrase' : '' ?>"
+               data-scene="membre"<?= $phrase !== '' ? ' tabindex="0" role="button" aria-expanded="false" aria-label="Voir le mot de ' . e($nom) . '"' : '' ?>>
         <div class="membre__cadre">
           <?php if ($photo !== '' && is_file(__DIR__ . '/' . ltrim($photo, '/'))): ?>
             <img class="membre__img" src="<?= e($photo) ?>" alt="<?= e($nom) ?>"
@@ -293,6 +295,9 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
           <p class="membre__roles">
             <?php foreach ($roles as $r): ?><span><?= e((string)$r) ?></span><?php endforeach; ?>
           </p>
+          <?php if ($phrase !== ''): ?>
+          <blockquote class="membre__phrase"><p><?= e($phrase) ?></p></blockquote>
+          <?php endif; ?>
         </div>
         <h3 class="membre__nom"><?= e($nom) ?></h3>
       </article>

@@ -207,7 +207,8 @@
           "Dirigeant associatif",
           "ex-arbitre International",
           "2 enfants au CHAR"
-        ]
+        ],
+        "phrase": ""
       },
       {
         "nom": "Cédric BOULENGER",
@@ -215,7 +216,8 @@
         "roles": [
           "Cadre informatique",
           "1 enfant au CHAR"
-        ]
+        ],
+        "phrase": ""
       },
       {
         "nom": "Alexandre DY",
@@ -223,7 +225,8 @@
         "roles": [
           "Directeur Cabinet",
           "Expert-Comptable"
-        ]
+        ],
+        "phrase": ""
       },
       {
         "nom": "Vincent GARNIER",
@@ -231,7 +234,8 @@
         "roles": [
           "Responsable commercial",
           "Gardien de but du club"
-        ]
+        ],
+        "phrase": ""
       },
       {
         "nom": "David GAUDU",
@@ -239,7 +243,8 @@
         "roles": [
           "Responsable de projets",
           "2 enfants au CHAR"
-        ]
+        ],
+        "phrase": ""
       },
       {
         "nom": "Vincent GUILLAUME",
@@ -247,7 +252,8 @@
         "roles": [
           "Médecin du sport",
           "ex-staff équipe de France U20"
-        ]
+        ],
+        "phrase": ""
       },
       {
         "nom": "Valentin HAMEL",
@@ -256,7 +262,8 @@
           "Responsable restauration",
           "Joueur du club",
           "1 enfant au CHAR"
-        ]
+        ],
+        "phrase": ""
       },
       {
         "nom": "Aurélie LECAT",
@@ -264,7 +271,8 @@
         "roles": [
           "Gestionnaire d'entreprise",
           "1 enfant au CHAR"
-        ]
+        ],
+        "phrase": ""
       },
       {
         "nom": "Romain LECLERC",
@@ -273,7 +281,8 @@
           "Entrepreneur",
           "Joueur du club",
           "1 enfant au CHAR"
-        ]
+        ],
+        "phrase": "Licencié à Rouen dès 1986, aujourd'hui parent, joueur loisir et bénévole au CHAR, je souhaite mettre mon expérience au service d'un projet collectif et ambitieux, pour faire grandir le club et en faire une fierté pour tous les licenciés."
       },
       {
         "nom": "Eloïse LELOUP",
@@ -282,7 +291,8 @@
           "Cheffe d'équipe",
           "Responsable d'équipe",
           "1 enfant au CHAR"
-        ]
+        ],
+        "phrase": "S'investir pour le club, pour nos enfants et construire ensemble un projet qui nous ressemble."
       },
       {
         "nom": "Lucile MARTIN",
@@ -290,7 +300,8 @@
         "roles": [
           "Cheffe de projets",
           "Joueuse du club"
-        ]
+        ],
+        "phrase": ""
       },
       {
         "nom": "Enguerrand THIBOUVILLE",
@@ -298,7 +309,8 @@
         "roles": [
           "Conseiller bancaire",
           "Arbitre national"
-        ]
+        ],
+        "phrase": ""
       },
       {
         "nom": "David THOMAS",
@@ -307,7 +319,8 @@
           "Gardien de résidences",
           "Arbitre régional",
           "Ancien dirigeant au CHAR"
-        ]
+        ],
+        "phrase": ""
       }
     ]
   },
