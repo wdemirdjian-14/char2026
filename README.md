@@ -18,6 +18,13 @@ Conçu **mobile first**.
   copie de toutes les adresses, suppression unitaire (droit à l'effacement RGPD).
 - **Textes du site** — édition de l'intégralité des contenus (122 champs), publiés
   immédiatement. Une sauvegarde horodatée est écrite avant chaque enregistrement.
+- **Programme & QR** — envoi du programme en PDF (20 Mo max, type réel vérifié :
+  en-tête `%PDF-` *et* type MIME, un fichier déguisé est refusé) et génération du
+  QR code du site, téléchargeable en PNG ou imprimable en affichette A4.
+
+Le PDF est envoyé depuis l'admin, donc **exclu du dépôt et protégé pendant le
+rsync** : un déploiement ne l'efface pas. Le bouton « Le programme » n'apparaît
+dans la barre du haut que si un PDF est effectivement en ligne.
 
 Sécurité : mot de passe stocké en empreinte bcrypt (jamais en clair), session
 `HttpOnly` + `Secure` + `SameSite=Strict` limitée à `/admin/`, jeton CSRF sur tous

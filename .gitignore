@@ -21,3 +21,6 @@ data/track-limite.json
 # Secrets : jamais dans le dépôt
 char2026-secrets/
 *-secrets/
+
+# Le programme PDF est envoyé depuis l'admin, pas versionné
+assets/programme/*.pdf

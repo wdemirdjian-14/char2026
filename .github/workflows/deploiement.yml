@@ -69,6 +69,7 @@ jobs:
             --exclude 'README.md' \
             --exclude 'assets/img/_source/' \
             --exclude '.DS_Store' \
+            --filter 'protect assets/programme/' \
             --filter 'protect data/supporters.jsonl' \
             --filter 'protect data/ratelimit.json' \
             --filter 'protect data/*.json' \

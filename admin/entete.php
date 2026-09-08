@@ -29,6 +29,7 @@ $titre = $titre ?? 'Administration';
     <a href="tableau-de-bord.php" class="<?= $page === 'stats' ? 'actif' : '' ?>">Audience</a>
     <a href="soutiens.php" class="<?= $page === 'soutiens' ? 'actif' : '' ?>">Soutiens</a>
     <a href="contenu.php" class="<?= $page === 'contenu' ? 'actif' : '' ?>">Textes du site</a>
+    <a href="programme.php" class="<?= $page === 'programme' ? 'actif' : '' ?>">Programme &amp; QR</a>
   </nav>
 </header>
 <main class="page"><div class="wrap">

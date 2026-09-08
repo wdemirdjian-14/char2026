@@ -14,6 +14,8 @@ $icones_piliers = [
   '<path d="M12 3 4 6v5.5c0 4.6 3.2 8.4 8 9.5 4.8-1.1 8-4.9 8-9.5V6l-8-3Z"/>',
   '<path d="M8 21h8m-4-4v4M7 4h10v5a5 5 0 0 1-10 0V4Zm10 1h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>',
 ];
+$fichierProgramme = c('programme.fichier', 'assets/programme/programme-char-2026.pdf');
+$programmeDispo   = is_file(__DIR__ . '/' . ltrim($fichierProgramme, '/'));
 $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3 0 0 0 2.95-2.46l1.4-7.6A2 2 0 0 0 19.7 9.5H15V5.6A2.6 2.6 0 0 0 12.4 3c-.5 0-.95.3-1.14.77L7 11"/>';
 ?><!DOCTYPE html>
 <html lang="fr">
@@ -47,6 +49,12 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
     <a href="#projet">Le projet</a>
     <a href="#equipe">L'équipe</a>
   </nav>
+  <?php if ($programmeDispo): ?>
+  <button type="button" class="btn btn--prog" id="ouvrirProgramme" data-suivi="ouvrir-programme">
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-doc"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+    <span><?= e(c('programme.bouton')) ?></span>
+  </button>
+  <?php endif; ?>
   <a href="#soutien" class="btn btn--nav" data-suivi="cta-nav">
     <svg class="ico-thumb" viewBox="0 0 24 24" aria-hidden="true"><?= $POUCE ?></svg>
     Je soutiens
@@ -59,6 +67,7 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
   <a href="#valeurs">Valeurs</a>
   <a href="#projet">Le projet</a>
   <a href="#equipe">L'équipe</a>
+  <?php if ($programmeDispo): ?><button type="button" class="mobile-menu__prog" id="ouvrirProgrammeMobile" data-suivi="ouvrir-programme-menu">📄 <?= e(c('programme.bouton')) ?></button><?php endif; ?>
   <a href="#soutien" class="mobile-menu__cta" data-suivi="cta-menu">👍 Je soutiens</a>
 </div>
 
@@ -356,6 +365,38 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
     </div>
   </div>
 </div>
+
+<?php if ($programmeDispo): ?>
+<div class="lecteur" id="lecteur" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lecteurTitre">
+  <div class="lecteur__voile" data-fermer></div>
+  <div class="lecteur__boite">
+    <header class="lecteur__tete">
+      <div>
+        <h2 id="lecteurTitre"><?= e(c('programme.titre_lecteur')) ?></h2>
+        <p><?= e(c('programme.sous_titre')) ?></p>
+      </div>
+      <button type="button" class="lecteur__fermer" data-fermer aria-label="Fermer le programme">✕</button>
+    </header>
+
+    <div class="lecteur__vue">
+      <iframe id="lecteurCadre" title="<?= e(c('programme.titre_lecteur')) ?>" src="about:blank" loading="lazy"></iframe>
+      <div class="lecteur__repli" id="lecteurRepli">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/></svg>
+        <p>Votre navigateur n'affiche pas les PDF directement.</p>
+        <a class="btn btn--primary" href="<?= e($fichierProgramme) ?>" target="_blank" rel="noopener" data-suivi="programme-onglet"><?= e(c('programme.ouvrir_onglet')) ?></a>
+      </div>
+    </div>
+
+    <footer class="lecteur__pied">
+      <a class="btn btn--primary" href="<?= e($fichierProgramme) ?>" download data-suivi="programme-telecharger">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-doc"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>
+        <?= e(c('programme.telecharger')) ?>
+      </a>
+      <a class="btn btn--fin-clair" href="<?= e($fichierProgramme) ?>" target="_blank" rel="noopener" data-suivi="programme-onglet"><?= e(c('programme.ouvrir_onglet')) ?></a>
+    </footer>
+  </div>
+</div>
+<?php endif; ?>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 

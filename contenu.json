@@ -18,6 +18,14 @@
     "cta_principal": "Je soutiens le projet",
     "cta_secondaire": "Voir les 10 priorités"
   },
+  "programme": {
+    "bouton": "Le programme",
+    "titre_lecteur": "Notre programme pour le CHAR",
+    "sous_titre": "10 priorités pour l'avenir du club",
+    "fichier": "assets/programme/programme-char-2026.pdf",
+    "telecharger": "Télécharger le PDF",
+    "ouvrir_onglet": "Ouvrir dans un nouvel onglet"
+  },
   "compteur": {
     "objectif": 500,
     "libelle": "Soutiens",
