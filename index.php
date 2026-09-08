@@ -283,21 +283,31 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
         $phrase = trim((string)($m['phrase'] ?? ''));
         if ($nom === '') continue; ?>
       <article class="membre<?= $i === 0 ? ' membre--tete' : '' ?><?= $phrase !== '' ? ' membre--phrase' : '' ?>"
-               data-scene="membre"<?= $phrase !== '' ? ' tabindex="0" role="button" aria-expanded="false" aria-label="Voir le mot de ' . e($nom) . '"' : '' ?>>
+               data-scene="membre"<?= $phrase !== '' ? ' tabindex="0" role="button" aria-expanded="false" aria-label="Retourner la carte de ' . e($nom) . '"' : '' ?>>
         <div class="membre__cadre">
-          <?php if ($photo !== '' && is_file(__DIR__ . '/' . ltrim($photo, '/'))): ?>
-            <img class="membre__img" src="<?= e($photo) ?>" alt="<?= e($nom) ?>"
-                 width="212" height="202" loading="lazy" decoding="async">
-          <?php else: ?>
-            <span class="membre__initiales" aria-hidden="true"><?= e(mb_substr($nom, 0, 1)) ?></span>
-          <?php endif; ?>
-          <span class="membre__voile" aria-hidden="true"></span>
-          <p class="membre__roles">
-            <?php foreach ($roles as $r): ?><span><?= e((string)$r) ?></span><?php endforeach; ?>
-          </p>
-          <?php if ($phrase !== ''): ?>
-          <blockquote class="membre__phrase"><p><?= e($phrase) ?></p></blockquote>
-          <?php endif; ?>
+          <div class="membre__pivot">
+
+            <div class="membre__face membre__face--photo">
+              <?php if ($photo !== '' && is_file(__DIR__ . '/' . ltrim($photo, '/'))): ?>
+                <img class="membre__img" src="<?= e($photo) ?>" alt="<?= e($nom) ?>"
+                     width="212" height="202" loading="lazy" decoding="async">
+              <?php else: ?>
+                <span class="membre__initiales" aria-hidden="true"><?= e(mb_substr($nom, 0, 1)) ?></span>
+              <?php endif; ?>
+              <span class="membre__voile" aria-hidden="true"></span>
+              <p class="membre__roles">
+                <?php foreach ($roles as $r): ?><span><?= e((string)$r) ?></span><?php endforeach; ?>
+              </p>
+            </div>
+
+            <?php if ($phrase !== ''): ?>
+            <div class="membre__face membre__face--mot">
+              <blockquote class="membre__phrase"><p><?= e($phrase) ?></p></blockquote>
+              <span class="membre__retour" aria-hidden="true">↺</span>
+            </div>
+            <?php endif; ?>
+
+          </div>
         </div>
         <h3 class="membre__nom"><?= e($nom) ?></h3>
       </article>

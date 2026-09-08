@@ -188,17 +188,25 @@
       el.style.setProperty('--mb', ((1 - e) * 9).toFixed(2));
 
       if (!aPhrase) return;
+      // pendant le retournement au clic, on laisse la transition faire
+      if (pivot && pivot.classList.contains('anime')) return;
       var pv = el.__epinglee ? 1 : palier(p, 0.36, 0.50) * (1 - palier(p, 0.70, 0.84));
       el.style.setProperty('--pv', pv.toFixed(3));
     });
 
     if (!aPhrase) return;
+    var pivot = $('.membre__pivot', el);
 
     function basculer() {
       el.__epinglee = !el.__epinglee;
       el.setAttribute('aria-expanded', el.__epinglee ? 'true' : 'false');
-      if (el.__epinglee) el.style.setProperty('--pv', '1');
-      suivre({ t: 'clic', id: 'mot-candidat' });
+      if (pivot) {
+        pivot.classList.add('anime');            // rotation franche
+        clearTimeout(el.__minuteur);
+        el.__minuteur = setTimeout(function () { pivot.classList.remove('anime'); }, 820);
+      }
+      el.style.setProperty('--pv', el.__epinglee ? '1' : '0');
+      suivre({ t: 'clic', id: 'retourner-carte' });
     }
     el.addEventListener('click', basculer);
     el.addEventListener('keydown', function (ev) {
