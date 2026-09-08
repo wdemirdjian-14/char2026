@@ -4,18 +4,47 @@
    Modifiez uniquement ce fichier.
    ========================================================= */
 
-/* Clé secrète pour télécharger la liste des soutiens
-   (api/export.php?key=...).
+/* ---------------------------------------------------------
+   SECRETS — jamais dans ce dépôt.
 
-   Elle N'EST PAS dans le code : ce dépôt est versionné, une clé
-   écrite ici serait lisible par tous. Elle est fournie par le
-   serveur via la variable d'environnement CHAR2026_EXPORT_KEY
-   (voir fastcgi_param dans le bloc nginx).
+   Ils vivent dans un fichier PHP situé HORS de la racine web,
+   par défaut <parent de la racine>/char2026-secrets/config.php,
+   qui retourne un tableau :
 
-   Tant qu'elle vaut la valeur par défaut, export.php refuse de
-   servir quoi que ce soit. */
+       <?php return [
+           'export_key' => '…',
+           'admin_user' => '…',
+           'admin_hash' => '…',   // password_hash(), contient des $
+           'sel_stats'  => '…',
+       ];
+
+   Pourquoi un fichier et non des fastcgi_param nginx : une
+   empreinte bcrypt commence par $2y$… et nginx interprète le $
+   comme une variable, ce qui casse la configuration.
+   Le chemin peut être surchargé par CHAR2026_SECRETS.
+   --------------------------------------------------------- */
+function char2026_secrets(): array
+{
+    static $s = null;
+    if ($s !== null) return $s;
+    $chemin = getenv('CHAR2026_SECRETS') ?: dirname(__DIR__, 2) . '/char2026-secrets/config.php';
+    $v = is_readable($chemin) ? @include $chemin : null;
+    $s = is_array($v) ? $v : [];
+    return $s;
+}
+
+function secret(string $cle, string $defaut = ''): string
+{
+    $s = char2026_secrets();
+    if (!empty($s[$cle])) return (string)$s[$cle];
+    $env = getenv('CHAR2026_' . strtoupper($cle));   // repli par variable d'environnement
+    return is_string($env) && $env !== '' ? $env : $defaut;
+}
+
+/* Clé d'export CSV. Tant qu'elle n'est pas configurée,
+   export.php refuse de servir quoi que ce soit. */
 const EXPORT_KEY_DEFAUT = 'cle-non-configuree';
-define('EXPORT_KEY', getenv('CHAR2026_EXPORT_KEY') ?: EXPORT_KEY_DEFAUT);
+define('EXPORT_KEY', secret('export_key', EXPORT_KEY_DEFAUT));
 
 // Ajoute un décalage au compteur public (0 = compteur réel uniquement).
 const COUNT_OFFSET = 0;

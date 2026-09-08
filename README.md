@@ -6,6 +6,36 @@ Liste « Ensemble, dans le respect et l'exigence », portée par Pierre Dehaen.
 Site statique + une petite API PHP pour le compteur de soutiens et la collecte d'e-mails.
 Conçu **mobile first**.
 
+## Espace d'administration
+
+`https://char2026.walautao.fr/admin/` — trois onglets :
+
+- **Audience** — pages vues, visiteurs, taux de soutien, fréquentation quotidienne,
+  clics par bouton, provenance, appareils, profondeur de lecture. Mesure interne,
+  **sans cookie ni service tiers** : les visiteurs sont comptés par une empreinte
+  anonyme (SHA-256 salé, renouvelée chaque jour), aucune adresse IP n'est conservée.
+- **Soutiens** — liste complète, recherche, répartition par profil, export CSV,
+  copie de toutes les adresses, suppression unitaire (droit à l'effacement RGPD).
+- **Textes du site** — édition de l'intégralité des contenus (122 champs), publiés
+  immédiatement. Une sauvegarde horodatée est écrite avant chaque enregistrement.
+
+Sécurité : mot de passe stocké en empreinte bcrypt (jamais en clair), session
+`HttpOnly` + `Secure` + `SameSite=Strict` limitée à `/admin/`, jeton CSRF sur tous
+les envois, 5 tentatives de connexion par quart d'heure, déconnexion après 2 h
+d'inactivité, nettoyage du HTML saisi (les balises exécutables sont retirées).
+
+## Contenu éditable
+
+Tous les textes vivent dans `contenu.json`, rendu côté serveur par `index.php`.
+Aucun texte n'est en dur dans le gabarit : ajouter une priorité ou changer une
+formule se fait depuis l'admin, sans toucher au code.
+
+## Secrets
+
+Identifiant, empreinte du mot de passe, clé d'export et sel des statistiques sont
+dans un fichier **hors racine web** (`/var/www/char2026-secrets/config.php`),
+jamais dans ce dépôt. Modèle : `deploiement/secrets-exemple.php`.
+
 ## Déploiement — par tag
 
 Le déploiement se déclenche **uniquement sur un tag** commençant par `v` :

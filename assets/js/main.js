@@ -7,7 +7,7 @@
   var API = 'api/support.php';
   var CONTACT = 'ensemblepourlechar@gmail.com';
   var LS_KEY = 'char2026_supported';
-  var GOAL = 500;                       // objectif affiché sur la patinoire
+  var GOAL = window.CHAR_OBJECTIF || 500;   // objectif interne : pilote la jauge de la patinoire
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
@@ -350,11 +350,6 @@
     var pct = clamp(n / GOAL, 0, 1) * 100;
     if (rinkFill) rinkFill.style.setProperty('--fill', pct.toFixed(1) + '%');
     if (rinkPuck) rinkPuck.style.setProperty('--fill', pct.toFixed(1) + '%');
-    if (boardHint) {
-      boardHint.innerHTML = n >= GOAL
-        ? 'Objectif atteint — <b>merci !</b>'
-        : 'Objectif <b>' + GOAL + '</b> soutiens · encore <b>' + (GOAL - n) + '</b>';
-    }
   }
 
   function animateTo(n) {
@@ -408,6 +403,47 @@
       });
   }
   loadStats();
+
+  /* =======================================================
+     6 bis. MESURE D'AUDIENCE (sans cookie ni traceur tiers)
+     ======================================================= */
+  function suivre(ev) {
+    try {
+      var corps = JSON.stringify(ev);
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('api/track.php', new Blob([corps], { type: 'application/json' }));
+      } else {
+        fetch('api/track.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: corps, keepalive: true });
+      }
+    } catch (e) { /* la mesure ne doit jamais gêner la navigation */ }
+  }
+
+  function typeAppareil() {
+    var l = Math.min(screen.width, screen.height);
+    if (l < 768) return 'mobile';
+    if (l < 1024) return 'tablette';
+    return 'bureau';
+  }
+
+  suivre({ t: 'vue', r: document.referrer || '', d: typeAppareil() });
+
+  document.addEventListener('click', function (e) {
+    var cible = e.target.closest('[data-suivi]');
+    if (cible) suivre({ t: 'clic', id: cible.dataset.suivi });
+  }, { passive: true });
+
+  var paliers = [25, 50, 75, 100], atteints = {};
+  window.addEventListener('scroll', function () {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (h <= 0) return;
+    var p = (window.scrollY / h) * 100;
+    for (var i = 0; i < paliers.length; i++) {
+      if (p >= paliers[i] && !atteints[paliers[i]]) {
+        atteints[paliers[i]] = true;
+        suivre({ t: 'profondeur', s: paliers[i] });
+      }
+    }
+  }, { passive: true });
 
   /* =======================================================
      7. POUCES
@@ -527,6 +563,7 @@
 
   function success(resp, data) {
     localStorage.setItem(LS_KEY, '1');
+    // la conversion est comptée côté serveur (api/support.php), pas ici
     animateTo(resp.count);
     if (resp.recent) renderPeople(resp.recent);
     var big = $('#thumbBig');

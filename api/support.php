@@ -170,6 +170,15 @@ if (NOTIFY_EMAIL !== '') {
     );
 }
 
+// Comptabilise la conversion dans les statistiques du jour.
+// Fait côté serveur uniquement : plus fiable que le navigateur, et
+// évite le double comptage avec la mesure d'audience du JavaScript.
+$statsPhp = __DIR__ . '/../inc/stats.php';
+if (is_readable($statsPhp)) {
+    require_once $statsPhp;
+    stats_enregistrer(['t' => 'soutien']);
+}
+
 [$count, $recent] = read_all($file);
 echo json_encode([
     'ok' => true, 'already' => false,

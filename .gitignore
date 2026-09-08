@@ -11,3 +11,13 @@ assets/img/_source/
 .DS_Store
 *.log
 deploiement.conf
+
+# Statistiques et sauvegardes de contenu (vivent sur le serveur)
+data/stats-*.json
+data/contenu-*.json
+data/admin-tentatives.json
+data/track-limite.json
+
+# Secrets : jamais dans le dépôt
+char2026-secrets/
+*-secrets/
