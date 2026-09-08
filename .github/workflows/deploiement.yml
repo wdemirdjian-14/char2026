@@ -1,0 +1,82 @@
+name: Déploiement char2026.walautao.fr
+
+# Déclenchement par TAG uniquement : `git tag v1.0.0 && git push origin v1.0.0`
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:        # permet aussi un lancement manuel depuis l'onglet Actions
+
+concurrency:
+  group: deploiement-char2026
+  cancel-in-progress: false
+
+jobs:
+  deployer:
+    name: Envoi sur le VPS
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+      - name: Vérification des secrets
+        run: |
+          manquants=""
+          [ -z "${{ secrets.VPS_HOST }}" ] && manquants="$manquants VPS_HOST"
+          [ -z "${{ secrets.VPS_USER }}" ] && manquants="$manquants VPS_USER"
+          [ -z "${{ secrets.VPS_SSH_KEY }}" ] && manquants="$manquants VPS_SSH_KEY"
+          [ -z "${{ secrets.VPS_PATH }}" ] && manquants="$manquants VPS_PATH"
+          if [ -n "$manquants" ]; then
+            echo "::error::Secrets manquants :$manquants"
+            echo "À définir dans Settings › Secrets and variables › Actions."
+            exit 1
+          fi
+          echo "✓ Secrets présents"
+
+      - name: Préparation de la clé SSH
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploiement
+          chmod 600 ~/.ssh/deploiement
+          ssh-keyscan -p "${{ secrets.VPS_PORT || 22 }}" -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Envoi des fichiers (rsync)
+        # --delete nettoie les fichiers obsolètes, MAIS /data est protégé :
+        # il contient la liste des soutiens collectés sur le site.
+        run: |
+          rsync -az --delete --human-readable \
+            -e "ssh -i ~/.ssh/deploiement -p ${{ secrets.VPS_PORT || 22 }} -o StrictHostKeyChecking=yes" \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.gitignore' \
+            --exclude 'LISEZMOI.txt' \
+            --exclude 'README.md' \
+            --exclude 'assets/img/_source/' \
+            --exclude '.DS_Store' \
+            --filter 'protect data/supporters.jsonl' \
+            --filter 'protect data/ratelimit.json' \
+            --filter 'protect data/*.json' \
+            --filter 'protect data/*.jsonl' \
+            ./ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/"
+
+      - name: Droits d'écriture sur /data
+        run: |
+          ssh -i ~/.ssh/deploiement -p "${{ secrets.VPS_PORT || 22 }}" \
+            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
+            "mkdir -p '${{ secrets.VPS_PATH }}/data' && chmod 775 '${{ secrets.VPS_PATH }}/data' && touch '${{ secrets.VPS_PATH }}/data/supporters.jsonl' && chmod 664 '${{ secrets.VPS_PATH }}/data/supporters.jsonl'"
+
+      - name: Contrôle de mise en ligne
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 https://char2026.walautao.fr/ || echo 000)
+          echo "Page d'accueil : HTTP $code"
+          api=$(curl -s --max-time 20 'https://char2026.walautao.fr/api/support.php?action=stats' || echo '')
+          echo "API compteur   : ${api:-aucune réponse}"
+          if [ "$code" != "200" ]; then
+            echo "::warning::La page ne répond pas encore en 200 — vérifiez la racine du sous-domaine sur le VPS."
+          fi
+          case "$api" in
+            *'"ok":true'*) echo "✓ Compteur opérationnel" ;;
+            *) echo "::warning::L'API du compteur ne répond pas — vérifiez PHP et les droits sur /data." ;;
+          esac

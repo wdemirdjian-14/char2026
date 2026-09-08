@@ -1,0 +1,13 @@
+# Données collectées : elles vivent sur le serveur, jamais dans le dépôt
+data/supporters.jsonl
+data/ratelimit.json
+data/*.json
+data/*.jsonl
+
+# Sources haute définition des images (non déployées)
+assets/img/_source/
+
+# Divers
+.DS_Store
+*.log
+deploiement.conf

@@ -1,0 +1,102 @@
+===========================================================
+ CHAR 2026 — char2026.walautao.fr
+ Site de campagne « Ensemble, dans le respect et l'exigence »
+ Conçu MOBILE FIRST (téléphone d'abord, puis tablette/desktop)
+===========================================================
+
+1. MISE EN LIGNE SUR IONOS
+--------------------------
+Envoyez TOUT le contenu de ce dossier (sans le dossier lui-même)
+à la racine du site char2026.walautao.fr, via :
+ - l'Explorateur de fichiers de l'espace client IONOS, ou
+ - un client FTP/SFTP (FileZilla, Cyberduck…).
+
+IMPORTANT : activez l'affichage des fichiers cachés dans votre client FTP,
+sinon les deux .htaccess ne seront pas transférés. Celui de /data protège
+la liste des e-mails de tout accès public.
+
+Arborescence attendue sur le serveur :
+  /index.html
+  /.htaccess
+  /robots.txt
+  /assets/css/style.css
+  /assets/js/main.js
+  /assets/img/mascotte.png
+  /api/config.php
+  /api/support.php
+  /api/export.php
+  /data/.htaccess         (dossier accessible en écriture)
+
+PHP 8.x doit être actif (c'est le cas par défaut chez IONOS).
+
+2. DROITS D'ÉCRITURE
+--------------------
+Le dossier /data doit être inscriptible (chmod 755, ou 775 si besoin).
+Il contiendra automatiquement :
+  data/supporters.jsonl   -> la liste des soutiens
+  data/ratelimit.json     -> anti-spam
+
+3. À PERSONNALISER AVANT PUBLICATION
+------------------------------------
+Fichier api/config.php :
+  EXPORT_KEY    -> remplacez 'char2026-a-changer' par une clé secrète.
+  NOTIFY_EMAIL  -> mettez ensemblepourlechar@gmail.com pour recevoir
+                   un e-mail à chaque nouveau soutien (laisser '' sinon).
+  COUNT_OFFSET  -> laissez 0 (compteur réel).
+
+Fichier assets/js/main.js, tout en haut :
+  var GOAL = 500;   -> objectif affiché sur la patinoire du tableau
+                       d'affichage (la jauge et le palet se calent dessus).
+
+4. RÉCUPÉRER LES ADRESSES E-MAIL
+--------------------------------
+Ouvrez dans le navigateur :
+  https://char2026.walautao.fr/api/export.php?key=VOTRE_CLE
+Un fichier CSV (ouvrable dans Excel) est téléchargé avec :
+Date, Prénom, E-mail, Profil, Message, Affichage public.
+
+5. IMAGES
+---------
+Deux versions de votre mascotte sont utilisées :
+
+  assets/img/mascotte.png        640 px, ~304 Ko
+     Grande mascotte à droite du titre d'accueil.
+     Déclarée en fond CSS au-delà de 1100 px seulement : les téléphones
+     et tablettes ne la téléchargent jamais.
+     Si le fichier manque, un blason « CHAR » en CSS prend le relais.
+
+  assets/img/mascotte-skate.png  220 px, ~45 Ko
+     La mascotte qui patine en bas de l'écran (voir § 6).
+     C'est la seule image chargée sur mobile.
+
+L'original haute définition est conservé dans assets/img/_source/ :
+ce dossier n'a pas besoin d'être mis en ligne (il n'est pas dans l'archive).
+
+Si vous remplacez ces images, gardez les mêmes noms de fichiers et,
+pour la patineuse, une mascotte tournée vers la DROITE (elle est
+retournée automatiquement quand on remonte la page).
+
+6. CE QUI BOUGE AU SCROLL
+-------------------------
+ - Accueil épinglé qui recule et s'estompe quand on descend
+ - Bandeau « Respect / Engagement / Solidarité / Performance » lié au scroll
+ - Phrases qui s'allument mot après mot
+ - Valeurs C·H·A·R : scène épinglée, les 4 valeurs s'enchaînent
+ - 10 priorités : swipe au doigt sur mobile, rail horizontal piloté
+   par le scroll sur grand écran
+ - Compteur : tableau d'affichage de patinoire, chiffres qui basculent,
+   palet qui glisse le long de la glace jusqu'à l'objectif
+ - Mascotte patineuse en bas d'écran : elle sert de jauge d'avancement
+   dans la page. Elle glisse sur une bande de glace, laisse une traînée
+   jaune derrière elle, se met à patiner (balancement + gerbe de glace)
+   tant qu'on fait défiler, et se retourne quand on remonte.
+   Elle apparaît après les premiers défilements et remplace la classique
+   barre de progression.
+
+Tout est automatiquement désactivé si le visiteur a activé
+« Réduire les animations » dans son système.
+
+7. RGPD
+-------
+Les données restent sur votre hébergement, ne sont ni cédées ni revendues.
+Pensez à supprimer data/supporters.jsonl après les élections.
