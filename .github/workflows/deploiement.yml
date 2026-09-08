@@ -15,19 +15,23 @@ jobs:
   deployer:
     name: Envoi sur le VPS
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
       - name: Récupération du code
         uses: actions/checkout@v4
 
       - name: Vérification des secrets
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_PATH: ${{ secrets.VPS_PATH }}
         run: |
           manquants=""
-          [ -z "${{ secrets.VPS_HOST }}" ] && manquants="$manquants VPS_HOST"
-          [ -z "${{ secrets.VPS_USER }}" ] && manquants="$manquants VPS_USER"
-          [ -z "${{ secrets.VPS_SSH_KEY }}" ] && manquants="$manquants VPS_SSH_KEY"
-          [ -z "${{ secrets.VPS_PATH }}" ] && manquants="$manquants VPS_PATH"
+          [ -n "$VPS_HOST" ]    || manquants="$manquants VPS_HOST"
+          [ -n "$VPS_USER" ]    || manquants="$manquants VPS_USER"
+          [ -n "$VPS_SSH_KEY" ] || manquants="$manquants VPS_SSH_KEY"
+          [ -n "$VPS_PATH" ]    || manquants="$manquants VPS_PATH"
           if [ -n "$manquants" ]; then
             echo "::error::Secrets manquants :$manquants"
             echo "À définir dans Settings › Secrets and variables › Actions."
@@ -36,18 +40,28 @@ jobs:
           echo "✓ Secrets présents"
 
       - name: Préparation de la clé SSH
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
         run: |
           mkdir -p ~/.ssh && chmod 700 ~/.ssh
-          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploiement
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/deploiement
           chmod 600 ~/.ssh/deploiement
-          ssh-keyscan -p "${{ secrets.VPS_PORT || 22 }}" -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+          ssh-keyscan -p "${VPS_PORT:-22}" -H "$VPS_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          echo "✓ Clé installée"
 
       - name: Envoi des fichiers (rsync)
         # --delete nettoie les fichiers obsolètes, MAIS /data est protégé :
         # il contient la liste des soutiens collectés sur le site.
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PATH: ${{ secrets.VPS_PATH }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
         run: |
           rsync -az --delete --human-readable \
-            -e "ssh -i ~/.ssh/deploiement -p ${{ secrets.VPS_PORT || 22 }} -o StrictHostKeyChecking=yes" \
+            -e "ssh -i $HOME/.ssh/deploiement -p ${VPS_PORT:-22} -o StrictHostKeyChecking=yes" \
             --exclude '.git/' \
             --exclude '.github/' \
             --exclude '.gitignore' \
@@ -59,13 +73,17 @@ jobs:
             --filter 'protect data/ratelimit.json' \
             --filter 'protect data/*.json' \
             --filter 'protect data/*.jsonl' \
-            ./ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/"
+            ./ "$VPS_USER@$VPS_HOST:$VPS_PATH/"
 
       - name: Droits d'écriture sur /data
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PATH: ${{ secrets.VPS_PATH }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
         run: |
-          ssh -i ~/.ssh/deploiement -p "${{ secrets.VPS_PORT || 22 }}" \
-            "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}" \
-            "mkdir -p '${{ secrets.VPS_PATH }}/data' && chmod 775 '${{ secrets.VPS_PATH }}/data' && touch '${{ secrets.VPS_PATH }}/data/supporters.jsonl' && chmod 664 '${{ secrets.VPS_PATH }}/data/supporters.jsonl'"
+          ssh -i "$HOME/.ssh/deploiement" -p "${VPS_PORT:-22}" "$VPS_USER@$VPS_HOST" \
+            "mkdir -p '$VPS_PATH/data' && chmod 775 '$VPS_PATH/data' && touch '$VPS_PATH/data/supporters.jsonl' && chmod 664 '$VPS_PATH/data/supporters.jsonl'"
 
       - name: Contrôle de mise en ligne
         run: |
