@@ -77,6 +77,7 @@ $data = contenu();
 
 $titresBlocs = [
   'meta' => 'Référencement (titre et description Google)',
+  'site' => 'Adresse officielle du site',
   'marque' => 'Nom du club',
   'hero' => "Écran d'accueil",
   'compteur' => "Tableau d'affichage des soutiens",
@@ -91,7 +92,8 @@ $titresBlocs = [
   'pied' => 'Pied de page',
 ];
 $libelles = [
-  'titre' => 'Titre', 'description' => 'Description', 'sigle' => 'Sigle', 'nom' => 'Nom complet',
+  'titre' => 'Titre', 'description' => 'Description',
+  'domaine' => 'Adresse encodée dans le QR code', 'sigle' => 'Sigle', 'nom' => 'Nom complet',
   'bandeau_court' => 'Badge (version mobile)', 'bandeau_long' => 'Badge (version ordinateur)',
   'bandeau_date' => 'Date affichée dans le badge',
   'titre_ligne1' => 'Titre — ligne 1', 'titre_ligne2' => 'Titre — ligne 2 (en jaune)',

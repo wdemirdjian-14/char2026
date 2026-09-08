@@ -8,25 +8,25 @@ Conçu **mobile first**.
 
 ## Domaines
 
-Le site est indépendant du nom de domaine : aucun n'est codé en dur, tout se
-déduit de `HTTP_HOST` (le QR code de l'admin s'adapte donc tout seul).
+Le site répond sur trois adresses, servies par le même vhost et couvertes par
+un seul certificat Let's Encrypt (renouvellement automatique, expire le
+7 décembre 2026) :
 
-- **En service** : `char2026.walautao.fr`
-- **À venir** : `char2026.fr` — acheté, mais **pas encore délégué dans la zone
-  .fr** au 8 septembre 2026. Le registre ne renvoie aucun serveur de noms, ce
-  n'est donc pas un délai de propagation.
+- **https://char2026.fr** — adresse officielle
+- https://www.char2026.fr
+- https://char2026.walautao.fr — adresse d'origine, toujours active
 
-Un bloc nginx d'attente (`deploiement/nginx-char2026fr-attente.conf`) est déjà
-en place : dès que le DNS répondra, `char2026.fr` renverra vers le site et
-servira les défis ACME. Pour la bascule complète (certificat + service sur les
-trois adresses), lancer sur le VPS :
+Aucun domaine n'est codé en dur dans le site : tout se déduit de `HTTP_HOST`.
+Seule exception voulue, le **QR code** de l'admin, qui encode toujours
+`site.domaine` (modifiable dans les textes) plutôt que l'adresse par laquelle
+on consulte l'admin — sinon un QR imprimé pourrait pointer vers l'ancienne.
 
-```bash
-bash deploiement/activer-char2026-fr.sh
+Pour faire de `char2026.fr` la seule adresse et rediriger les deux autres,
+ajouter dans le bloc 443 de `deploiement/nginx-char2026.conf` :
+
+```nginx
+if ($host != char2026.fr) { return 301 https://char2026.fr$request_uri; }
 ```
-
-Le script refuse de s'exécuter tant que le DNS ne pointe pas sur le serveur, et
-restaure la configuration si nginx rejette le résultat.
 
 ## Espace d'administration
 

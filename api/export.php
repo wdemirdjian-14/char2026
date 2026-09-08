@@ -1,7 +1,7 @@
 <?php
 /* =========================================================
    CHAR 2026 — export CSV des soutiens
-   Usage : https://char2026.walautao.fr/api/export.php?key=VOTRE_CLE
+   Usage : https://char2026.fr/api/export.php?key=VOTRE_CLE
    ========================================================= */
 declare(strict_types=1);
 require __DIR__ . '/config.php';

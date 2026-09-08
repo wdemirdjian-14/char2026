@@ -1,337 +1,340 @@
 {
-    "meta": {
-        "titre": "CHAR 2026 — Ensemble, dans le respect et l'exigence",
-        "description": "Liste portée par Pierre Dehaen pour les élections du Club de Hockey Amateur de Rouen — 3 octobre 2026. Découvrez nos 10 priorités et soutenez le projet."
-    },
-    "marque": {
-        "sigle": "CHAR",
-        "nom": "Club de Hockey<br>Amateur de Rouen"
-    },
-    "hero": {
-        "bandeau_court": "Élections du CHAR",
-        "bandeau_long": "Élections du Club de Hockey Amateur de Rouen",
-        "bandeau_date": "3 octobre 2026",
-        "titre_ligne1": "Ensemble,",
-        "titre_ligne2": "dans le respect",
-        "titre_ligne3": "et l'exigence",
-        "chapo": "Une liste portée par <b>Pierre Dehaen</b> pour redonner <b>fierté, stabilité et ambition</b> au CHAR.",
-        "cta_principal": "Je soutiens le projet",
-        "cta_secondaire": "Voir les 10 priorités"
-    },
-    "programme": {
-        "bouton": "Le programme",
-        "fichier": "assets/programme/programme-char-2026.pdf"
-    },
-    "son": {
-        "actif": true,
-        "fichier": "assets/son/goal-horn.mp3",
-        "volume": 35,
-        "libelle_activer": "Activer le son",
-        "libelle_couper": "Couper le son"
-    },
-    "compteur": {
-        "objectif": 300,
-        "libelle": "Soutiens",
-        "periode": "1<sup>re</sup> période",
-        "direct": "En direct",
-        "afficher_objectif": false,
-        "ligne_basse": "Élections le 3 octobre 2026"
-    },
-    "bandeau_defilant": [
-        "Respect",
-        "Engagement",
-        "Solidarité",
-        "Performance"
-    ],
-    "engagement": {
-        "surtitre": "Notre engagement",
-        "titre": "Redonner <em>fierté</em>, <em>stabilité</em><br>et <em>ambition</em> au CHAR",
-        "texte": "Nous souhaitons construire un club structuré, respectueux et ambitieux, où chaque licencié, parent et bénévole trouve sa place dans un environnement sain, exigeant et bienveillant.",
-        "citation": "Les activités physiques et sportives constituent un élément important de l'éducation, de la culture, de l'intégration et de la vie sociale.",
-        "citation_source": "Article 1 du Code du sport",
-        "ambition_titre": "Faire rayonner le hockey rouennais",
-        "ambition_texte": "Avec exigence, respect et engagement collectif. Parce que le hockey est bien plus qu'un sport : c'est un lieu d'<b>éducation</b>, de <b>partage</b> et de <b>progression</b>."
-    },
-    "valeurs": {
-        "surtitre": "Nos valeurs nous rassemblent",
-        "items": [
-            {
-                "lettre": "C",
-                "titre": "Courage",
-                "texte": "Prendre les décisions justes, même quand elles sont difficiles."
-            },
-            {
-                "lettre": "H",
-                "titre": "Honnêteté",
-                "texte": "Transparence sur les décisions, les comptes et les choix sportifs."
-            },
-            {
-                "lettre": "A",
-                "titre": "Audace",
-                "texte": "Oser un projet ambitieux pour toutes les catégories du club."
-            },
-            {
-                "lettre": "R",
-                "titre": "Respect",
-                "texte": "Des licenciés, des bénévoles, des officiels et des adversaires."
-            }
+  "meta": {
+    "titre": "CHAR 2026 — Ensemble, dans le respect et l'exigence",
+    "description": "Liste portée par Pierre Dehaen pour les élections du Club de Hockey Amateur de Rouen — 3 octobre 2026. Découvrez nos 10 priorités et soutenez le projet."
+  },
+  "site": {
+    "domaine": "https://char2026.fr/"
+  },
+  "marque": {
+    "sigle": "CHAR",
+    "nom": "Club de Hockey<br>Amateur de Rouen"
+  },
+  "hero": {
+    "bandeau_court": "Élections du CHAR",
+    "bandeau_long": "Élections du Club de Hockey Amateur de Rouen",
+    "bandeau_date": "3 octobre 2026",
+    "titre_ligne1": "Ensemble,",
+    "titre_ligne2": "dans le respect",
+    "titre_ligne3": "et l'exigence",
+    "chapo": "Une liste portée par <b>Pierre Dehaen</b> pour redonner <b>fierté, stabilité et ambition</b> au CHAR.",
+    "cta_principal": "Je soutiens le projet",
+    "cta_secondaire": "Voir les 10 priorités"
+  },
+  "programme": {
+    "bouton": "Le programme",
+    "fichier": "assets/programme/programme-char-2026.pdf"
+  },
+  "son": {
+    "actif": true,
+    "fichier": "assets/son/goal-horn.mp3",
+    "volume": 35,
+    "libelle_activer": "Activer le son",
+    "libelle_couper": "Couper le son"
+  },
+  "compteur": {
+    "objectif": 300,
+    "libelle": "Soutiens",
+    "periode": "1<sup>re</sup> période",
+    "direct": "En direct",
+    "afficher_objectif": false,
+    "ligne_basse": "Élections le 3 octobre 2026"
+  },
+  "bandeau_defilant": [
+    "Respect",
+    "Engagement",
+    "Solidarité",
+    "Performance"
+  ],
+  "engagement": {
+    "surtitre": "Notre engagement",
+    "titre": "Redonner <em>fierté</em>, <em>stabilité</em><br>et <em>ambition</em> au CHAR",
+    "texte": "Nous souhaitons construire un club structuré, respectueux et ambitieux, où chaque licencié, parent et bénévole trouve sa place dans un environnement sain, exigeant et bienveillant.",
+    "citation": "Les activités physiques et sportives constituent un élément important de l'éducation, de la culture, de l'intégration et de la vie sociale.",
+    "citation_source": "Article 1 du Code du sport",
+    "ambition_titre": "Faire rayonner le hockey rouennais",
+    "ambition_texte": "Avec exigence, respect et engagement collectif. Parce que le hockey est bien plus qu'un sport : c'est un lieu d'<b>éducation</b>, de <b>partage</b> et de <b>progression</b>."
+  },
+  "valeurs": {
+    "surtitre": "Nos valeurs nous rassemblent",
+    "items": [
+      {
+        "lettre": "C",
+        "titre": "Courage",
+        "texte": "Prendre les décisions justes, même quand elles sont difficiles."
+      },
+      {
+        "lettre": "H",
+        "titre": "Honnêteté",
+        "texte": "Transparence sur les décisions, les comptes et les choix sportifs."
+      },
+      {
+        "lettre": "A",
+        "titre": "Audace",
+        "texte": "Oser un projet ambitieux pour toutes les catégories du club."
+      },
+      {
+        "lettre": "R",
+        "titre": "Respect",
+        "texte": "Des licenciés, des bénévoles, des officiels et des adversaires."
+      }
+    ]
+  },
+  "projet": {
+    "surtitre": "Notre projet pour le CHAR",
+    "titre": "10 priorités <em>pour l'avenir</em>",
+    "priorites": [
+      {
+        "titre": "Structurer le club avec des règles claires",
+        "points": [
+          "Fonctionnement transparent et décisions collégiales",
+          "Création de commissions pour plus d'efficacité",
+          "1 réunion toutes les 2 semaines avec le staff technique",
+          "1 réunion par mois entre les élus",
+          "Communication claire vers les licenciés et parents"
         ]
-    },
-    "projet": {
-        "surtitre": "Notre projet pour le CHAR",
-        "titre": "10 priorités <em>pour l'avenir</em>",
-        "priorites": [
-            {
-                "titre": "Structurer le club avec des règles claires",
-                "points": [
-                    "Fonctionnement transparent et décisions collégiales",
-                    "Création de commissions pour plus d'efficacité",
-                    "1 réunion toutes les 2 semaines avec le staff technique",
-                    "1 réunion par mois entre les élus",
-                    "Communication claire vers les licenciés et parents"
-                ]
-            },
-            {
-                "titre": "Redonner du sens et des valeurs au club",
-                "points": [
-                    "Révision du règlement intérieur",
-                    "Élaboration d'un projet associatif",
-                    "Interventions d'experts : nutrition, prévention blessures, gestes qui sauvent, médias sociaux, paris sportifs, arbitrage…",
-                    "Politique sportive cohérente et ambitieuse"
-                ]
-            },
-            {
-                "titre": "Garantir un encadrement sportif de qualité",
-                "points": [
-                    "Staff qualifié et en nombre suffisant",
-                    "Fiche de suivi pour chaque joueur / joueuse",
-                    "Évaluations en début, mi-saison et fin de saison avec débrief",
-                    "Accompagnement personnalisé tout au long de la saison"
-                ]
-            },
-            {
-                "titre": "Recruter, fidéliser et valoriser nos bénévoles",
-                "points": [
-                    "Donner envie de s'investir dans la vie du club",
-                    "Prise en charge de la licence (part fédérale) pour RE, officiels de table de marque, encadrants bénévoles glace",
-                    "Actions de valorisation : communication, invitations, dotation textile…"
-                ]
-            },
-            {
-                "titre": "Mettre en place un plan de formation",
-                "points": [
-                    "Formations pour éducateurs, dirigeants, bénévoles et arbitres",
-                    "Thèmes : modules fédéraux, VSS / discriminations, éthique &amp; déontologie, Basicompta, gestion associative, conduite minibus…",
-                    "Sensibilisation à l'arbitrage par catégorie avec arbitres régionaux / nationaux"
-                ]
-            },
-            {
-                "titre": "Développer les relations avec le RHE 76 et les clubs locaux",
-                "points": [
-                    "Travailler main dans la main pour préparer les athlètes à un projet d'excellence",
-                    "Interventions régulières avec joueurs et staff du RHE 76",
-                    "Échanges et partenariats avec les clubs de toutes disciplines de la métropole"
-                ]
-            },
-            {
-                "titre": "Une place pour toutes et tous",
-                "points": [
-                    "Développement du hockey féminin et du parahockey",
-                    "Créneaux spécifiques et encadrement diplômé",
-                    "Valorisation des équipes loisirs et représentation au sein du CA",
-                    "Accès au hockey pour tous les âges et tous les niveaux"
-                ]
-            },
-            {
-                "titre": "(Re)trouver un esprit club autour d'événements",
-                "points": [
-                    "Organisation d'une Fête du club",
-                    "Tournoi de chaque catégorie : des temps forts inoubliables",
-                    "Animations, convivialité et échanges entre générations"
-                ]
-            },
-            {
-                "titre": "Repenser le modèle économique du club",
-                "points": [
-                    "Relations fortes avec la Fédération, la Ligue et les partenaires institutionnels",
-                    "Recherche de nouveaux partenaires privés",
-                    "Réflexion sur les appels à projets et offres de prestations de qualité"
-                ]
-            },
-            {
-                "titre": "Proposer du hockey dans un cadre sécuritaire et bienveillant",
-                "points": [
-                    "Accueil de qualité pour toutes et tous",
-                    "Prévention et lutte contre toutes formes de violences et de discriminations",
-                    "Climat sain pour permettre à chacun de s'épanouir"
-                ]
-            }
+      },
+      {
+        "titre": "Redonner du sens et des valeurs au club",
+        "points": [
+          "Révision du règlement intérieur",
+          "Élaboration d'un projet associatif",
+          "Interventions d'experts : nutrition, prévention blessures, gestes qui sauvent, médias sociaux, paris sportifs, arbitrage…",
+          "Politique sportive cohérente et ambitieuse"
         ]
-    },
-    "equipe": {
-        "surtitre": "Une équipe à votre écoute",
-        "titre": "Disponibles et<br><em>proches du terrain</em>",
-        "texte": "Une équipe aux profils complémentaires, animée par la même passion du hockey. Nous agirons avec transparence et engagement, de manière constructive et durable, pour le bien de tous les licenciés.",
-        "piliers": [
-            {
-                "titre": "Écoute",
-                "texte": "Des élus disponibles et présents au bord de la glace."
-            },
-            {
-                "titre": "Transparence",
-                "texte": "Des décisions expliquées, des comptes lisibles par tous."
-            },
-            {
-                "titre": "Responsabilité",
-                "texte": "Chacun sait qui fait quoi, et rend compte de son action."
-            },
-            {
-                "titre": "Ambition",
-                "texte": "Un cap clair pour les prochaines saisons du club."
-            }
+      },
+      {
+        "titre": "Garantir un encadrement sportif de qualité",
+        "points": [
+          "Staff qualifié et en nombre suffisant",
+          "Fiche de suivi pour chaque joueur / joueuse",
+          "Évaluations en début, mi-saison et fin de saison avec débrief",
+          "Accompagnement personnalisé tout au long de la saison"
         ]
-    },
-    "liste": {
-        "surtitre": "Notre liste",
-        "titre": "Une équipe <em>diversifiée</em>,<br>complémentaire et passionnée",
-        "texte": "Treize licenciés, parents et bénévoles au service du club. Chacun apporte son métier, son expérience et son temps.",
-        "membres": [
-            {
-                "nom": "Pierre DEHAEN",
-                "photo": "assets/img/liste/pierre-dehaen.jpg",
-                "roles": [
-                    "Responsable communication",
-                    "Dirigeant associatif",
-                    "ex-arbitre International",
-                    "2 enfants au CHAR"
-                ]
-            },
-            {
-                "nom": "Cédric BOULENGER",
-                "photo": "assets/img/liste/cedric-boulenger.jpg",
-                "roles": [
-                    "Cadre informatique",
-                    "1 enfant au CHAR"
-                ]
-            },
-            {
-                "nom": "Alexandre DY",
-                "photo": "assets/img/liste/alexandre-dy.jpg",
-                "roles": [
-                    "Directeur Cabinet",
-                    "Expert-Comptable"
-                ]
-            },
-            {
-                "nom": "Vincent GARNIER",
-                "photo": "assets/img/liste/vincent-garnier.jpg",
-                "roles": [
-                    "Responsable commercial",
-                    "Gardien de but du club"
-                ]
-            },
-            {
-                "nom": "David GAUDU",
-                "photo": "assets/img/liste/david-gaudu.jpg",
-                "roles": [
-                    "Responsable de projets",
-                    "2 enfants au CHAR"
-                ]
-            },
-            {
-                "nom": "Vincent GUILLAUME",
-                "photo": "assets/img/liste/vincent-guillaume.jpg",
-                "roles": [
-                    "Médecin du sport",
-                    "ex-staff équipe de France U20"
-                ]
-            },
-            {
-                "nom": "Valentin HAMEL",
-                "photo": "assets/img/liste/valentin-hamel.jpg",
-                "roles": [
-                    "Responsable restauration",
-                    "Joueur du club",
-                    "1 enfant au CHAR"
-                ]
-            },
-            {
-                "nom": "Aurélie LECAT",
-                "photo": "assets/img/liste/aurelie-lecat.jpg",
-                "roles": [
-                    "Gestionnaire d'entreprise",
-                    "1 enfant au CHAR"
-                ]
-            },
-            {
-                "nom": "Romain LECLERC",
-                "photo": "assets/img/liste/romain-leclerc.jpg",
-                "roles": [
-                    "Entrepreneur",
-                    "Joueur du club",
-                    "1 enfant au CHAR"
-                ]
-            },
-            {
-                "nom": "Eloïse LELOUP",
-                "photo": "assets/img/liste/eloise-leloup.jpg",
-                "roles": [
-                    "Cheffe d'équipe",
-                    "Responsable d'équipe",
-                    "1 enfant au CHAR"
-                ]
-            },
-            {
-                "nom": "Lucile MARTIN",
-                "photo": "assets/img/liste/lucile-martin.jpg",
-                "roles": [
-                    "Cheffe de projets",
-                    "Joueuse du club"
-                ]
-            },
-            {
-                "nom": "Enguerrand THIBOUVILLE",
-                "photo": "assets/img/liste/enguerrand-thibouville.jpg",
-                "roles": [
-                    "Conseiller bancaire",
-                    "Arbitre national"
-                ]
-            },
-            {
-                "nom": "David THOMAS",
-                "photo": "assets/img/liste/david-thomas.jpg",
-                "roles": [
-                    "Gardien de résidences",
-                    "Arbitre régional",
-                    "Ancien dirigeant au CHAR"
-                ]
-            }
+      },
+      {
+        "titre": "Recruter, fidéliser et valoriser nos bénévoles",
+        "points": [
+          "Donner envie de s'investir dans la vie du club",
+          "Prise en charge de la licence (part fédérale) pour RE, officiels de table de marque, encadrants bénévoles glace",
+          "Actions de valorisation : communication, invitations, dotation textile…"
         ]
-    },
-    "soutien": {
-        "surtitre": "Faisons avancer le CHAR",
-        "titre": "Ajoutez votre <em>pouce</em><br>à la candidature",
-        "texte": "Votre soutien compte. Laissez votre e-mail pour recevoir nos informations.",
-        "bouton": "J'apporte mon soutien",
-        "consentement": "J'accepte d'être recontacté·e par e-mail au sujet de cette candidature. *",
-        "affichage_public": "Afficher mon prénom dans le mur des soutiens",
-        "rgpd": "Vos données ne sont utilisées que pour cette candidature, ne sont jamais cédées ni revendues, et sont supprimées après les élections. Désinscription sur simple demande à",
-        "profils": [
-            "Licencié·e",
-            "Parent",
-            "Bénévole",
-            "Encadrant / Staff",
-            "Sympathisant·e"
+      },
+      {
+        "titre": "Mettre en place un plan de formation",
+        "points": [
+          "Formations pour éducateurs, dirigeants, bénévoles et arbitres",
+          "Thèmes : modules fédéraux, VSS / discriminations, éthique &amp; déontologie, Basicompta, gestion associative, conduite minibus…",
+          "Sensibilisation à l'arbitrage par catégorie avec arbitres régionaux / nationaux"
         ]
-    },
-    "finale": {
-        "texte": "Ensemble, faisons du CHAR<br>un club dont nous serons <em>tous fiers</em> !",
-        "bouton": "👍 Je soutiens le projet"
-    },
-    "pied": {
-        "base": "Club de Hockey Amateur de Rouen<br>Élections — 3 octobre 2026",
-        "email": "ensemblepourlechar@gmail.com",
-        "liste": "« Ensemble, dans le respect et l'exigence »<br>portée par Pierre Dehaen",
-        "mentions": "© 2026 — Liste « Ensemble, dans le respect et l'exigence ». Site non officiel du club, publié dans le cadre de la campagne électorale."
-    }
+      },
+      {
+        "titre": "Développer les relations avec le RHE 76 et les clubs locaux",
+        "points": [
+          "Travailler main dans la main pour préparer les athlètes à un projet d'excellence",
+          "Interventions régulières avec joueurs et staff du RHE 76",
+          "Échanges et partenariats avec les clubs de toutes disciplines de la métropole"
+        ]
+      },
+      {
+        "titre": "Une place pour toutes et tous",
+        "points": [
+          "Développement du hockey féminin et du parahockey",
+          "Créneaux spécifiques et encadrement diplômé",
+          "Valorisation des équipes loisirs et représentation au sein du CA",
+          "Accès au hockey pour tous les âges et tous les niveaux"
+        ]
+      },
+      {
+        "titre": "(Re)trouver un esprit club autour d'événements",
+        "points": [
+          "Organisation d'une Fête du club",
+          "Tournoi de chaque catégorie : des temps forts inoubliables",
+          "Animations, convivialité et échanges entre générations"
+        ]
+      },
+      {
+        "titre": "Repenser le modèle économique du club",
+        "points": [
+          "Relations fortes avec la Fédération, la Ligue et les partenaires institutionnels",
+          "Recherche de nouveaux partenaires privés",
+          "Réflexion sur les appels à projets et offres de prestations de qualité"
+        ]
+      },
+      {
+        "titre": "Proposer du hockey dans un cadre sécuritaire et bienveillant",
+        "points": [
+          "Accueil de qualité pour toutes et tous",
+          "Prévention et lutte contre toutes formes de violences et de discriminations",
+          "Climat sain pour permettre à chacun de s'épanouir"
+        ]
+      }
+    ]
+  },
+  "equipe": {
+    "surtitre": "Une équipe à votre écoute",
+    "titre": "Disponibles et<br><em>proches du terrain</em>",
+    "texte": "Une équipe aux profils complémentaires, animée par la même passion du hockey. Nous agirons avec transparence et engagement, de manière constructive et durable, pour le bien de tous les licenciés.",
+    "piliers": [
+      {
+        "titre": "Écoute",
+        "texte": "Des élus disponibles et présents au bord de la glace."
+      },
+      {
+        "titre": "Transparence",
+        "texte": "Des décisions expliquées, des comptes lisibles par tous."
+      },
+      {
+        "titre": "Responsabilité",
+        "texte": "Chacun sait qui fait quoi, et rend compte de son action."
+      },
+      {
+        "titre": "Ambition",
+        "texte": "Un cap clair pour les prochaines saisons du club."
+      }
+    ]
+  },
+  "liste": {
+    "surtitre": "Notre liste",
+    "titre": "Une équipe <em>diversifiée</em>,<br>complémentaire et passionnée",
+    "texte": "Treize licenciés, parents et bénévoles au service du club. Chacun apporte son métier, son expérience et son temps.",
+    "membres": [
+      {
+        "nom": "Pierre DEHAEN",
+        "photo": "assets/img/liste/pierre-dehaen.jpg",
+        "roles": [
+          "Responsable communication",
+          "Dirigeant associatif",
+          "ex-arbitre International",
+          "2 enfants au CHAR"
+        ]
+      },
+      {
+        "nom": "Cédric BOULENGER",
+        "photo": "assets/img/liste/cedric-boulenger.jpg",
+        "roles": [
+          "Cadre informatique",
+          "1 enfant au CHAR"
+        ]
+      },
+      {
+        "nom": "Alexandre DY",
+        "photo": "assets/img/liste/alexandre-dy.jpg",
+        "roles": [
+          "Directeur Cabinet",
+          "Expert-Comptable"
+        ]
+      },
+      {
+        "nom": "Vincent GARNIER",
+        "photo": "assets/img/liste/vincent-garnier.jpg",
+        "roles": [
+          "Responsable commercial",
+          "Gardien de but du club"
+        ]
+      },
+      {
+        "nom": "David GAUDU",
+        "photo": "assets/img/liste/david-gaudu.jpg",
+        "roles": [
+          "Responsable de projets",
+          "2 enfants au CHAR"
+        ]
+      },
+      {
+        "nom": "Vincent GUILLAUME",
+        "photo": "assets/img/liste/vincent-guillaume.jpg",
+        "roles": [
+          "Médecin du sport",
+          "ex-staff équipe de France U20"
+        ]
+      },
+      {
+        "nom": "Valentin HAMEL",
+        "photo": "assets/img/liste/valentin-hamel.jpg",
+        "roles": [
+          "Responsable restauration",
+          "Joueur du club",
+          "1 enfant au CHAR"
+        ]
+      },
+      {
+        "nom": "Aurélie LECAT",
+        "photo": "assets/img/liste/aurelie-lecat.jpg",
+        "roles": [
+          "Gestionnaire d'entreprise",
+          "1 enfant au CHAR"
+        ]
+      },
+      {
+        "nom": "Romain LECLERC",
+        "photo": "assets/img/liste/romain-leclerc.jpg",
+        "roles": [
+          "Entrepreneur",
+          "Joueur du club",
+          "1 enfant au CHAR"
+        ]
+      },
+      {
+        "nom": "Eloïse LELOUP",
+        "photo": "assets/img/liste/eloise-leloup.jpg",
+        "roles": [
+          "Cheffe d'équipe",
+          "Responsable d'équipe",
+          "1 enfant au CHAR"
+        ]
+      },
+      {
+        "nom": "Lucile MARTIN",
+        "photo": "assets/img/liste/lucile-martin.jpg",
+        "roles": [
+          "Cheffe de projets",
+          "Joueuse du club"
+        ]
+      },
+      {
+        "nom": "Enguerrand THIBOUVILLE",
+        "photo": "assets/img/liste/enguerrand-thibouville.jpg",
+        "roles": [
+          "Conseiller bancaire",
+          "Arbitre national"
+        ]
+      },
+      {
+        "nom": "David THOMAS",
+        "photo": "assets/img/liste/david-thomas.jpg",
+        "roles": [
+          "Gardien de résidences",
+          "Arbitre régional",
+          "Ancien dirigeant au CHAR"
+        ]
+      }
+    ]
+  },
+  "soutien": {
+    "surtitre": "Faisons avancer le CHAR",
+    "titre": "Ajoutez votre <em>pouce</em><br>à la candidature",
+    "texte": "Votre soutien compte. Laissez votre e-mail pour recevoir nos informations.",
+    "bouton": "J'apporte mon soutien",
+    "consentement": "J'accepte d'être recontacté·e par e-mail au sujet de cette candidature. *",
+    "affichage_public": "Afficher mon prénom dans le mur des soutiens",
+    "rgpd": "Vos données ne sont utilisées que pour cette candidature, ne sont jamais cédées ni revendues, et sont supprimées après les élections. Désinscription sur simple demande à",
+    "profils": [
+      "Licencié·e",
+      "Parent",
+      "Bénévole",
+      "Encadrant / Staff",
+      "Sympathisant·e"
+    ]
+  },
+  "finale": {
+    "texte": "Ensemble, faisons du CHAR<br>un club dont nous serons <em>tous fiers</em> !",
+    "bouton": "👍 Je soutiens le projet"
+  },
+  "pied": {
+    "base": "Club de Hockey Amateur de Rouen<br>Élections — 3 octobre 2026",
+    "email": "ensemblepourlechar@gmail.com",
+    "liste": "« Ensemble, dans le respect et l'exigence »<br>portée par Pierre Dehaen",
+    "mentions": "© 2026 — Liste « Ensemble, dans le respect et l'exigence ». Site non officiel du club, publié dans le cadre de la campagne électorale."
+  }
 }

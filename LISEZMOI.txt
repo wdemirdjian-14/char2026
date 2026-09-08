@@ -1,5 +1,5 @@
 ===========================================================
- CHAR 2026 — char2026.walautao.fr
+ CHAR 2026 — char2026.fr
  Site de campagne « Ensemble, dans le respect et l'exigence »
  Conçu MOBILE FIRST (téléphone d'abord, puis tablette/desktop)
 ===========================================================
@@ -7,7 +7,7 @@
 1. MISE EN LIGNE SUR IONOS
 --------------------------
 Envoyez TOUT le contenu de ce dossier (sans le dossier lui-même)
-à la racine du site char2026.walautao.fr, via :
+à la racine du site char2026.fr, via :
  - l'Explorateur de fichiers de l'espace client IONOS, ou
  - un client FTP/SFTP (FileZilla, Cyberduck…).
 
@@ -63,7 +63,7 @@ Fichier assets/js/main.js, tout en haut :
 4. RÉCUPÉRER LES ADRESSES E-MAIL
 --------------------------------
 Ouvrez dans le navigateur :
-  https://char2026.walautao.fr/api/export.php?key=VOTRE_CLE
+  https://char2026.fr/api/export.php?key=VOTRE_CLE
 Un fichier CSV (ouvrable dans Excel) est téléchargé avec :
 Date, Prénom, E-mail, Profil, Message, Affichage public.
 

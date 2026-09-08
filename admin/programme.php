@@ -63,8 +63,14 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['action'] ?? '') ==
 $existe  = is_file($chemin);
 $taille  = $existe ? filesize($chemin) : 0;
 $modifie = $existe ? filemtime($chemin) : 0;
-$schema  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-$urlSite = $schema . '://' . ($_SERVER['HTTP_HOST'] ?? 'char2026.walautao.fr') . '/';
+// Adresse encodée dans le QR : le domaine officiel du site, et non
+// celle par laquelle on consulte l'admin — sans quoi un QR imprimé
+// pourrait pointer vers l'ancienne adresse.
+$urlSite = c('site.domaine');
+if ($urlSite === '') {
+    $schema  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $urlSite = $schema . '://' . ($_SERVER['HTTP_HOST'] ?? 'char2026.fr') . '/';
+}
 function hp(string $s): string { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
 ?>
 <h1 class="titre">Programme &amp; QR code</h1>
