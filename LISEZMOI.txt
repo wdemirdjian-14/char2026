@@ -48,10 +48,13 @@ CHAR2026_DATA_DIR (déjà prévue dans deploiement/nginx-char2026.conf).
 3. À PERSONNALISER AVANT PUBLICATION
 ------------------------------------
 Fichier api/config.php :
-  EXPORT_KEY    -> remplacez 'char2026-a-changer' par une clé secrète.
   NOTIFY_EMAIL  -> mettez ensemblepourlechar@gmail.com pour recevoir
                    un e-mail à chaque nouveau soutien (laisser '' sinon).
   COUNT_OFFSET  -> laissez 0 (compteur réel).
+
+La clé d'export CSV n'est PAS dans ce fichier : elle est fournie par le
+serveur (fastcgi_param CHAR2026_EXPORT_KEY dans le bloc nginx), pour ne
+jamais se retrouver dans le dépôt Git. Sans elle, export.php renvoie 503.
 
 Fichier assets/js/main.js, tout en haut :
   var GOAL = 500;   -> objectif affiché sur la patinoire du tableau

@@ -30,6 +30,24 @@ Un lancement manuel reste possible depuis l'onglet **Actions**.
 | `VPS_PATH` | Racine du sous-domaine sur le VPS | `/var/www/char2026.walautao.fr` |
 | `VPS_PORT` | Port SSH (optionnel, 22 par défaut) | `22` |
 
+## En production
+
+Déployé sur le VPS : **https://char2026.walautao.fr** (nginx + PHP-FPM 8.3,
+certificat Let's Encrypt, HTTP redirigé en 301 vers HTTPS).
+
+Particularités de ce serveur, à connaître avant d'y toucher :
+
+- **nginx tourne sous l'utilisateur `warren`**, pas `www-data`. Le pool PHP-FPM
+  dédié (`deploiement/php-fpm-char2026.conf`) tourne donc en `www-data` mais
+  expose son socket en `warren:warren 0660`, sinon nginx reçoit un
+  « Permission denied » sur le socket.
+- Le vhost `char2026.walautao.fr` était initialement déclaré dans
+  `sites-available/default` par certbot, pointé sur wazzzfood. Les blocs ont été
+  déplacés dans un vhost dédié, en réutilisant le certificat existant.
+- La clé d'export **n'est pas dans le code** : elle arrive par
+  `fastcgi_param CHAR2026_EXPORT_KEY` dans le bloc nginx. Sans elle,
+  `export.php` renvoie 503 et ne sert rien.
+
 ## Serveur : nginx, pas Apache
 
 Le VPS tourne sous **nginx**, qui **ignore les fichiers `.htaccess`**.
@@ -56,7 +74,8 @@ le rsync** : une mise à jour du site ne perd jamais les adresses déjà recueil
 
 ## À personnaliser
 
-- `api/config.php` → `EXPORT_KEY` (clé d'export CSV), `NOTIFY_EMAIL` (alerte à chaque soutien)
+- clé d'export CSV → `fastcgi_param CHAR2026_EXPORT_KEY` dans le bloc nginx, **jamais dans le dépôt**
+- `api/config.php` → `NOTIFY_EMAIL` (alerte à chaque soutien)
 - `assets/js/main.js` → `var GOAL = 500;` (objectif affiché sur la patinoire)
 
 ## Récupérer les adresses e-mail

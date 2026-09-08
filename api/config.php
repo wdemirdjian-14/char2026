@@ -4,9 +4,18 @@
    Modifiez uniquement ce fichier.
    ========================================================= */
 
-// Clé secrète pour télécharger la liste des soutiens (api/export.php?key=...)
-// >>> CHANGEZ CETTE VALEUR <<<
-const EXPORT_KEY = 'char2026-a-changer';
+/* Clé secrète pour télécharger la liste des soutiens
+   (api/export.php?key=...).
+
+   Elle N'EST PAS dans le code : ce dépôt est versionné, une clé
+   écrite ici serait lisible par tous. Elle est fournie par le
+   serveur via la variable d'environnement CHAR2026_EXPORT_KEY
+   (voir fastcgi_param dans le bloc nginx).
+
+   Tant qu'elle vaut la valeur par défaut, export.php refuse de
+   servir quoi que ce soit. */
+const EXPORT_KEY_DEFAUT = 'cle-non-configuree';
+define('EXPORT_KEY', getenv('CHAR2026_EXPORT_KEY') ?: EXPORT_KEY_DEFAUT);
 
 // Ajoute un décalage au compteur public (0 = compteur réel uniquement).
 const COUNT_OFFSET = 0;

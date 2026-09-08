@@ -6,6 +6,14 @@
 declare(strict_types=1);
 require __DIR__ . '/config.php';
 
+// Refus total tant qu'aucune clé n'a été configurée sur le serveur.
+if (EXPORT_KEY === EXPORT_KEY_DEFAUT) {
+    http_response_code(503);
+    header('Content-Type: text/plain; charset=utf-8');
+    echo "Export désactivé : la variable CHAR2026_EXPORT_KEY n'est pas définie sur le serveur.";
+    exit;
+}
+
 $key = (string)($_GET['key'] ?? '');
 if (!hash_equals(EXPORT_KEY, $key)) {
     http_response_code(403);
