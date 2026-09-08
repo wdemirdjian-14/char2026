@@ -268,6 +268,39 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
   </div>
 </section>
 
+<!-- ============ NOTRE LISTE ============ -->
+<section class="section section--liste" id="liste">
+  <div class="wrap">
+    <p class="eyebrow reveal" data-reveal><?= c('liste.surtitre') ?></p>
+    <h2 class="h2 h2--light reveal" data-reveal data-delay="80"><?= c('liste.titre') ?></h2>
+    <p class="lead lead--light reveal" data-reveal data-delay="140"><?= c('liste.texte') ?></p>
+
+    <div class="liste__grille">
+      <?php foreach (cl('liste.membres') as $i => $m):
+        $nom = (string)($m['nom'] ?? '');
+        $photo = (string)($m['photo'] ?? '');
+        $roles = is_array($m['roles'] ?? null) ? $m['roles'] : [];
+        if ($nom === '') continue; ?>
+      <article class="membre<?= $i === 0 ? ' membre--tete' : '' ?>" data-scene="membre">
+        <div class="membre__cadre">
+          <?php if ($photo !== '' && is_file(__DIR__ . '/' . ltrim($photo, '/'))): ?>
+            <img class="membre__img" src="<?= e($photo) ?>" alt="<?= e($nom) ?>"
+                 width="212" height="202" loading="lazy" decoding="async">
+          <?php else: ?>
+            <span class="membre__initiales" aria-hidden="true"><?= e(mb_substr($nom, 0, 1)) ?></span>
+          <?php endif; ?>
+          <span class="membre__voile" aria-hidden="true"></span>
+          <p class="membre__roles">
+            <?php foreach ($roles as $r): ?><span><?= e((string)$r) ?></span><?php endforeach; ?>
+          </p>
+        </div>
+        <h3 class="membre__nom"><?= e($nom) ?></h3>
+      </article>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
 <section class="section section--support" id="soutien">
   <div class="wrap wrap--narrow">
     <p class="eyebrow reveal" data-reveal><?= c('soutien.surtitre') ?></p>

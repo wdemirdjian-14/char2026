@@ -14,11 +14,29 @@ $message = ''; $classe = '';
 function fusionner($origine, $envoye)
 {
     if (is_array($origine) && !empty($origine) && array_is_list($origine)) {
+
+        // Liste d'objets (candidats, priorités, valeurs…) : on fusionne
+        // index par index et on ne supprime JAMAIS d'entrée. Un envoi
+        // incomplet ne peut donc pas amputer la liste.
+        if (is_array($origine[0] ?? null)) {
+            $sortie = $origine;
+            foreach ((array)$envoye as $i => $v) {
+                if (!is_numeric($i)) continue;
+                $i = (int)$i;
+                if (isset($origine[$i])) $sortie[$i] = fusionner($origine[$i], $v);
+            }
+            return $sortie;
+        }
+
+        // Liste de textes : le formulaire permet d'ajouter et de retirer des
+        // lignes, on la reconstruit donc — mais seulement s'il l'a bien
+        // rendue (marqueur __rendu). Sans marqueur, on garde l'original.
+        if (!is_array($envoye) || empty($envoye['__rendu'])) return $origine;
         $sortie = [];
-        foreach ((array)$envoye as $i => $v) {
-            $modele = $origine[0] ?? '';
-            $val = fusionner(is_array($modele) ? $modele : '', $v);
-            if (is_string($val) && trim($val) === '') continue;   // ligne vidée = supprimée
+        foreach ($envoye as $i => $v) {
+            if (!is_numeric($i)) continue;
+            $val = nettoyer_html((string)$v);
+            if (trim($val) === '') continue;      // ligne vidée = supprimée
             $sortie[] = $val;
         }
         return $sortie;
@@ -68,6 +86,7 @@ $titresBlocs = [
   'projet' => 'Section « 10 priorités »',
   'equipe' => 'Section « L\'équipe »',
   'soutien' => 'Section « Formulaire de soutien »',
+  'liste' => 'Section « Notre liste » (les 13 candidats)',
   'finale' => 'Bandeau jaune de fin',
   'pied' => 'Pied de page',
 ];
@@ -88,6 +107,8 @@ $libelles = [
   'points' => 'Puces', 'piliers' => 'Les quatre piliers', 'bouton' => 'Bouton',
   'consentement' => 'Case de consentement', 'affichage_public' => 'Case d\'affichage public',
   'rgpd' => 'Mention RGPD', 'profils' => 'Choix du menu « Vous êtes »',
+  'membres' => 'Les candidats', 'nom' => 'Nom affiché sous la photo',
+  'photo' => 'Chemin de la photo', 'roles' => 'Fonctions (en filigrane sur la photo)',
   'base' => 'Bloc de gauche', 'email' => 'Adresse e-mail de contact',
   'programme_url' => 'Lien du programme', 'programme_libelle' => 'Libellé du lien',
   'liste' => 'Bloc « Liste »', 'mentions' => 'Mentions légales',
@@ -128,6 +149,9 @@ function champs($valeur, string $nom, string $cle, array $libelles, int $niveau 
         $liste = array_is_list($valeur);
         echo '<div class="sous-bloc"><h4>' . hh(lib($cle, $libelles)) . '</h4>';
         if ($liste) {
+            if (!is_array($valeur[0] ?? null)) {
+                echo '<input type="hidden" name="' . hh($nom . '[__rendu]') . '" value="1">';
+            }
             echo '<div class="liste-repetable">';
             foreach ($valeur as $i => $v) {
                 if (is_array($v)) {

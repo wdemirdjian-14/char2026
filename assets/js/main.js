@@ -62,6 +62,7 @@
     vh = window.innerHeight;
     vw = window.innerWidth;
     sizePrios();
+    if (typeof decalerPortraits === 'function') decalerPortraits();
     var sy = window.scrollY;
     scenes.forEach(function (sc) {
       var top = sc.el.getBoundingClientRect().top + sy;
@@ -148,6 +149,34 @@
     var sp = parseFloat(el.dataset.speed || 0);
     addScene(el, 'through', function (p) {
       el.style.setProperty('--ty', ((0.5 - p) * (34 + sp * 22)).toFixed(1) + 'px');
+    });
+  });
+
+  /* --- Notre liste : chaque portrait surgit à son entrée dans l'écran ---
+     Animation liée au scroll (et non déclenchée une fois) : la carte
+     monte, grandit et se dévoile au fur et à mesure. Un léger décalage
+     par colonne fait cascader la rangée de gauche à droite. */
+  var portraits = $$('[data-scene="membre"]');
+
+  function decalerPortraits() {
+    var largeur = window.innerWidth || 1;
+    portraits.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      // fraction horizontale 0→1, convertie en petit retard
+      el.__retard = Math.min(0.055, (r.left / largeur) * 0.07);
+    });
+  }
+  decalerPortraits();
+  window.addEventListener('resize', decalerPortraits);
+
+  portraits.forEach(function (el) {
+    addScene(el, 'through', function (p) {
+      var e = clamp((p - 0.04 - (el.__retard || 0)) / 0.26, 0, 1);
+      e = 1 - Math.pow(1 - e, 3);
+      el.style.setProperty('--mo', e.toFixed(3));
+      el.style.setProperty('--my', ((1 - e) * 46).toFixed(1) + 'px');
+      el.style.setProperty('--ms', (0.9 + e * 0.1).toFixed(4));
+      el.style.setProperty('--mb', ((1 - e) * 9).toFixed(2));
     });
   });
 
