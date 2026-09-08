@@ -30,11 +30,29 @@ Un lancement manuel reste possible depuis l'onglet **Actions**.
 | `VPS_PATH` | Racine du sous-domaine sur le VPS | `/var/www/char2026.walautao.fr` |
 | `VPS_PORT` | Port SSH (optionnel, 22 par défaut) | `22` |
 
+## Serveur : nginx, pas Apache
+
+Le VPS tourne sous **nginx**, qui **ignore les fichiers `.htaccess`**.
+Deux conséquences, toutes deux traitées :
+
+1. **Les données collectées ne sont pas dans la racine web.**
+   `api/config.php` place `DATA_DIR` dans `<parent de la racine>/char2026-data`,
+   donc hors de portée du serveur web. Sans cela, la liste des e-mails serait
+   téléchargeable publiquement — problème RGPD.
+   Ordre de résolution : `CHAR2026_DATA_DIR` (variable d'environnement) →
+   `../char2026-data` → repli `./data`.
+
+2. **Un bloc `server` nginx est fourni** : `deploiement/nginx-char2026.conf`.
+   Il gère PHP-FPM, le refus de `/data` (filet de sécurité), les fichiers cachés,
+   la compression, le cache et les en-têtes de sécurité.
+   À installer une fois sur le VPS, puis `certbot --nginx -d char2026.walautao.fr`
+   pour le certificat HTTPS.
+
 ## Ce qui n'est jamais écrasé
 
-`data/` contient les soutiens collectés (`supporters.jsonl`). Ce dossier est
-**exclu du dépôt** (`.gitignore`) et **protégé pendant le rsync** : une mise à jour
-du site ne perd jamais les adresses déjà recueillies.
+`char2026-data/supporters.jsonl` contient les soutiens collectés. Ce dossier est
+**hors du dépôt** (`.gitignore`), **hors de la racine web**, et **protégé pendant
+le rsync** : une mise à jour du site ne perd jamais les adresses déjà recueillies.
 
 ## À personnaliser
 

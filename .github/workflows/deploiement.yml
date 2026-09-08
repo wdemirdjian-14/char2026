@@ -75,15 +75,31 @@ jobs:
             --filter 'protect data/*.jsonl' \
             ./ "$VPS_USER@$VPS_HOST:$VPS_PATH/"
 
-      - name: Droits d'écriture sur /data
+      - name: Dossier de données hors racine web
+        # nginx ignore les .htaccess : les données collectées sont stockées
+        # à côté de la racine du site, jamais dedans.
         env:
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USER: ${{ secrets.VPS_USER }}
           VPS_PATH: ${{ secrets.VPS_PATH }}
           VPS_PORT: ${{ secrets.VPS_PORT }}
         run: |
-          ssh -i "$HOME/.ssh/deploiement" -p "${VPS_PORT:-22}" "$VPS_USER@$VPS_HOST" \
-            "mkdir -p '$VPS_PATH/data' && chmod 775 '$VPS_PATH/data' && touch '$VPS_PATH/data/supporters.jsonl' && chmod 664 '$VPS_PATH/data/supporters.jsonl'"
+          script=$(cat <<'DISTANT'
+            set -e
+            racine="__VPS_PATH__"
+            donnees="$(dirname "$racine")/char2026-data"
+            mkdir -p "$donnees"
+            chmod 775 "$donnees"
+            [ -f "$donnees/supporters.jsonl" ] || : > "$donnees/supporters.jsonl"
+            chmod 664 "$donnees/supporters.jsonl"
+            # l'utilisateur de PHP-FPM doit pouvoir écrire
+            chgrp -R www-data "$donnees" 2>/dev/null || true
+            echo "Dossier de données : $donnees"
+            ls -la "$donnees"
+          DISTANT
+          )
+          printf '%s' "${script//__VPS_PATH__/$VPS_PATH}" | \
+            ssh -i "$HOME/.ssh/deploiement" -p "${VPS_PORT:-22}" "$VPS_USER@$VPS_HOST" bash -s
 
       - name: Contrôle de mise en ligne
         run: |

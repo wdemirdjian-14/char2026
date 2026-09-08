@@ -29,12 +29,21 @@ Arborescence attendue sur le serveur :
 
 PHP 8.x doit être actif (c'est le cas par défaut chez IONOS).
 
-2. DROITS D'ÉCRITURE
---------------------
-Le dossier /data doit être inscriptible (chmod 755, ou 775 si besoin).
-Il contiendra automatiquement :
-  data/supporters.jsonl   -> la liste des soutiens
-  data/ratelimit.json     -> anti-spam
+2. OÙ SONT STOCKÉES LES DONNÉES
+-------------------------------
+ATTENTION : le VPS tourne sous nginx, qui IGNORE les fichiers .htaccess.
+Un dossier /data dans la racine web serait téléchargeable publiquement.
+
+Les données sont donc placées HORS de la racine web, dans
+  <parent de la racine du site>/char2026-data/
+        supporters.jsonl   -> la liste des soutiens
+        ratelimit.json     -> anti-spam
+
+Ce dossier doit être inscriptible par PHP-FPM (chmod 775, groupe www-data).
+Le workflow de déploiement le crée et l'ajuste automatiquement.
+
+Pour forcer un autre emplacement, définissez la variable d'environnement
+CHAR2026_DATA_DIR (déjà prévue dans deploiement/nginx-char2026.conf).
 
 3. À PERSONNALISER AVANT PUBLICATION
 ------------------------------------
