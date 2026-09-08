@@ -10,6 +10,37 @@
   var GOAL = window.CHAR_OBJECTIF || 500;   // objectif interne : pilote la jauge de la patinoire
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* -------------------------------------------------------
+     Arrivée sur le site : toujours tout en haut.
+     Les navigateurs restaurent sinon la position précédente,
+     ce qui fait atterrir au milieu de l'accueil épinglé.
+     ------------------------------------------------------- */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  function allerAuBonEndroit() {
+    // Adresse avec ancre (#soutien depuis un QR code, par exemple) :
+    // on descend à la section, sinon on remonte tout en haut.
+    if (location.hash) {
+      var cible = null;
+      try { cible = document.querySelector(location.hash); } catch (e) {}
+      if (cible) {
+        var y = cible.getBoundingClientRect().top + window.scrollY - 56;
+        window.scrollTo({ top: y, behavior: 'instant' });
+        return;
+      }
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  allerAuBonEndroit();
+  window.addEventListener('load', function () {
+    allerAuBonEndroit();
+    // la mise en page bouge encore un peu après le chargement des polices
+    setTimeout(allerAuBonEndroit, 120);
+  });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) allerAuBonEndroit(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(allerAuBonEndroit);
+
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
@@ -521,21 +552,25 @@
     audio.addEventListener('ended',   function () { btnSon.classList.remove('joue'); });
     audio.addEventListener('pause',   function () { btnSon.classList.remove('joue'); });
 
-    // 1. tentative immédiate ; 2. repli sur la première interaction
-    var armer = function () {
+    /* Lecture automatique : les navigateurs l'interdisent tant que le
+       visiteur n'a pas produit un geste « activant ». Attention, le
+       défilement et touchstart n'en font PAS partie — seuls comptent
+       pointerdown/up, mousedown/up, touchend, keydown et click.
+       On tente au chargement, puis à chaque geste jusqu'à réussite. */
+    var GESTES = ['pointerdown', 'pointerup', 'mousedown', 'mouseup',
+                  'touchend', 'keydown', 'click'];
+
+    function retirerGestes(lancer) {
+      GESTES.forEach(function (ev) { window.removeEventListener(ev, lancer, true); });
+    }
+    function armer() {
       var lancer = function () {
-        jouerSon().catch(function () {});
-        retirer();
+        jouerSon().then(function () { retirerGestes(lancer); }).catch(function () {});
       };
-      var retirer = function () {
-        ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (ev) {
-          window.removeEventListener(ev, lancer, true);
-        });
-      };
-      ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (ev) {
-        window.addEventListener(ev, lancer, { capture: true, once: false, passive: true });
+      GESTES.forEach(function (ev) {
+        window.addEventListener(ev, lancer, { capture: true, passive: true });
       });
-    };
+    }
     if (!sonCoupe) jouerSon().catch(armer);
 
     btnSon.addEventListener('click', function (e) {

@@ -42,16 +42,35 @@ l'ouverture du site et rejoue à chaque nouveau soutien enregistré — un but.
 
 Deux points à connaître :
 
-- **Les navigateurs interdisent la lecture audio automatique.** Le premier
-  essai échoue presque toujours ; le script se rabat alors sur la première
-  interaction du visiteur (clic, appui, défilement). En pratique le son démarre
-  au premier geste, pas au chargement.
+- **Les navigateurs interdisent la lecture audio automatique.** Le script tente
+  au chargement, puis réessaie à chaque geste « activant » du visiteur jusqu'à
+  réussir. Attention : le **défilement et `touchstart` ne comptent pas** comme
+  geste activant — seuls `pointerdown/up`, `mousedown/up`, `touchend`, `keydown`
+  et `click` débloquent l'audio. Le son démarre donc au premier clic ou appui.
+  Chrome autorise parfois la lecture immédiate sur les sites déjà visités.
 - Un bouton haut-parleur dans la barre du haut coupe le son. Le choix est
   mémorisé, et **si le son est coupé le MP3 n'est pas téléchargé du tout**
   (`preload="none"`) : aucun coût pour ces visiteurs.
 
 Tout se règle depuis l'admin, onglet « Textes du site », bloc *Son* :
 activation, fichier et volume (35 % par défaut).
+
+## Cache
+
+La page HTML est servie en `no-cache, must-revalidate` : le visiteur reçoit
+toujours le markup à jour. Les feuilles de style, scripts, images et sons sont
+versionnés par `filemtime` et mis en cache 7 jours.
+
+À savoir sur nginx : un `add_header` dans un bloc `location` **annule tous ceux
+hérités du serveur**. Les en-têtes de sécurité sont donc répétés dans chaque
+bloc qui définit son propre cache.
+
+## Arrivée sur le site
+
+`history.scrollRestoration` est mis à `manual` : le visiteur arrive toujours en
+haut, jamais à la position qu'il occupait lors de sa visite précédente — sans
+quoi il atterrissait au milieu de l'accueil épinglé. Une adresse avec ancre
+(`#soutien` depuis un QR code) reste honorée et descend à la bonne section.
 
 ## Contenu éditable
 
