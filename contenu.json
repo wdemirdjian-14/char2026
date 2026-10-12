@@ -15,7 +15,7 @@
     "bandeau_long": "Élections du Club de Hockey Amateur de Rouen",
     "bandeau_date": "3 octobre 2026",
     "nouvelle_date": "7 novembre 2026",
-    "tampon_libelle": "Reporté au",
+    "tampon_libelle": "Élections reportées au",
     "titre_ligne1": "Ensemble,",
     "titre_ligne2": "dans le respect",
     "titre_ligne3": "et l'exigence",
@@ -87,10 +87,10 @@
           "Nous demandons que les lettres de candidature soient accessibles à tous les électeurs, et que notre réponse soit diffusée comme celle du club."
         ],
         "fichier": "assets/documents/2026-10-06-reponse-au-comite.pdf",
-        "bouton": "Lire le courrier (9 pages)"
+        "bouton": "Lire le courrier et son annexe (10 pages)"
       }
     ],
-    "note": "L'annexe de notre réponse (tableau d'analyse des candidatures) n'est pas publiée en ligne, car elle contient des informations personnelles sur des candidats."
+    "note": "Dans l'annexe publiée ici, les noms et prénoms sont réduits aux initiales et les numéros de suivi des recommandés sont masqués."
   },
   "engagement": {
     "surtitre": "Notre engagement",
