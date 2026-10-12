@@ -540,6 +540,48 @@
   }, { passive: true });
 
   /* =======================================================
+     6 ter. LETTRES DE CANDIDATURE — liseuse plein écran
+     Sans JS (ou sans <dialog>), le lien ouvre simplement la page.
+     ======================================================= */
+  var lecteur = $('#lecteur');
+  if (lecteur && typeof lecteur.showModal === 'function') {
+    var lecteurPages = $('#lecteurPages'), lecteurNom = $('#lecteurNom'), dernierLien = null;
+    $$('[data-lettre]').forEach(function (lien) {
+      lien.addEventListener('click', function (e) {
+        var pages;
+        try { pages = JSON.parse(lien.getAttribute('data-lettre')); } catch (err) { return; }
+        if (!pages || !pages.length) return;
+        e.preventDefault();
+        dernierLien = lien;
+        var nom = lien.getAttribute('data-nom') || '';
+        lecteurNom.textContent = nom;
+        lecteurPages.innerHTML = '';
+        pages.forEach(function (src, i) {
+          var img = document.createElement('img');
+          img.src = src;
+          img.alt = 'Lettre de candidature de ' + nom + ' — page ' + (i + 1) + ' sur ' + pages.length;
+          img.width = 1100; img.height = 1557;
+          img.decoding = 'async';
+          if (i > 0) img.loading = 'lazy';
+          lecteurPages.appendChild(img);
+        });
+        lecteurPages.scrollTop = 0;
+        document.documentElement.style.overflow = 'hidden';
+        lecteur.showModal();
+        lecteurPages.focus();
+      });
+    });
+    lecteur.addEventListener('click', function (e) {
+      if (e.target === lecteur || e.target.closest('[data-fermer]')) lecteur.close();
+    });
+    lecteur.addEventListener('close', function () {
+      document.documentElement.style.overflow = '';
+      lecteurPages.innerHTML = '';
+      if (dernierLien) dernierLien.focus({ preventScroll: true });
+    });
+  }
+
+  /* =======================================================
      7. POUCES
      ======================================================= */
   var toastEl = $('#toast'), toastT;

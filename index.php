@@ -50,10 +50,11 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
   </a>
   <?php endif; ?>
   <nav class="nav__links" aria-label="Navigation principale">
+    <a href="#news">News</a>
     <a href="#engagement">Engagement</a>
-    <a href="#valeurs">Valeurs</a>
     <a href="#projet">Le projet</a>
-    <a href="#equipe">L'équipe</a>
+    <a href="#liste">La liste</a>
+    <a href="#lettres">Lettres</a>
   </nav>
   <a href="#soutien" class="btn btn--nav" data-suivi="cta-nav">
     <svg class="ico-thumb" viewBox="0 0 24 24" aria-hidden="true"><?= $POUCE ?></svg>
@@ -71,10 +72,12 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
 </header>
 
 <div class="mobile-menu" id="mobileMenu" hidden>
+  <a href="#news">News</a>
   <a href="#engagement">Engagement</a>
   <a href="#valeurs">Valeurs</a>
   <a href="#projet">Le projet</a>
-  <a href="#equipe">L'équipe</a>
+  <a href="#liste">La liste</a>
+  <a href="#lettres">Lettres de candidature</a>
   <?php if ($programmeDispo): ?><a class="mobile-menu__prog" href="<?= e($fichierProgramme) ?>" target="_blank" rel="noopener" data-suivi="programme-direct-menu">📄 <?= e(c('programme.bouton')) ?></a><?php endif; ?>
   <a href="#soutien" class="mobile-menu__cta" data-suivi="cta-menu">👍 Je soutiens</a>
 </div>
@@ -175,6 +178,43 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
     <?php endforeach; endfor; ?>
   </div>
 </div>
+
+<!-- ============ NEWS SUR LA SITUATION ============ -->
+<?php $courriers = cl('news.courriers'); if ($courriers): ?>
+<section class="section news" id="news">
+  <div class="wrap wrap--narrow">
+    <p class="eyebrow reveal" data-reveal><?= c('news.surtitre') ?></p>
+    <h2 class="h2 reveal" data-reveal data-delay="80"><?= c('news.titre') ?></h2>
+    <p class="lead reveal" data-reveal data-delay="140"><?= c('news.texte') ?></p>
+
+    <ol class="news__fil">
+      <?php foreach ($courriers as $i => $co):
+        $fichier = (string)($co['fichier'] ?? '');
+        $dispo = $fichier !== '' && is_file(__DIR__ . '/' . ltrim($fichier, '/'));
+        $points = is_array($co['points'] ?? null) ? $co['points'] : []; ?>
+      <li class="courrier<?= $dispo ? '' : ' courrier--club' ?> reveal" data-reveal>
+        <p class="courrier__date"><?= e((string)($co['date'] ?? '')) ?></p>
+        <h3 class="courrier__titre"><?= e((string)($co['titre'] ?? '')) ?></h3>
+        <p class="courrier__resume"><?= e((string)($co['resume'] ?? '')) ?></p>
+        <?php if ($points): ?>
+        <details class="courrier__plus">
+          <summary>Les points clés</summary>
+          <ul><?php foreach ($points as $pt): ?><li><?= e((string)$pt) ?></li><?php endforeach; ?></ul>
+        </details>
+        <?php endif; ?>
+        <?php if ($dispo): ?>
+        <a class="courrier__lien" href="<?= e($fichier) ?>" target="_blank" rel="noopener" data-suivi="news-courrier-<?= $i + 1 ?>">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+          <?= e((string)($co['bouton'] ?? 'Lire le courrier')) ?>
+        </a>
+        <?php endif; ?>
+      </li>
+      <?php endforeach; ?>
+    </ol>
+    <?php if (c('news.note') !== ''): ?><p class="news__note"><?= c('news.note') ?></p><?php endif; ?>
+  </div>
+</section>
+<?php endif; ?>
 
 <section class="section section--light engagement" id="engagement">
   <div class="wrap">
@@ -315,6 +355,66 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
     </div>
   </div>
 </section>
+
+<!-- ============ LETTRES DE CANDIDATURE ============ -->
+<?php
+$livret = c('lettres.fichier_livret');
+$livretDispo = $livret !== '' && is_file(__DIR__ . '/' . ltrim($livret, '/'));
+$avecLettre = array_values(array_filter(cl('liste.membres'), function ($m) {
+    return is_array($m['lettre_pages'] ?? null) && $m['lettre_pages'] && trim((string)($m['nom'] ?? '')) !== '';
+}));
+if ($avecLettre): ?>
+<section class="section lettres" id="lettres">
+  <div class="wrap">
+    <p class="eyebrow reveal" data-reveal><?= c('lettres.surtitre') ?></p>
+    <h2 class="h2 reveal" data-reveal data-delay="80"><?= c('lettres.titre') ?></h2>
+    <p class="lead reveal" data-reveal data-delay="140"><?= c('lettres.texte') ?></p>
+
+    <ul class="lettres__grille">
+      <?php foreach ($avecLettre as $m):
+        $nom = (string)$m['nom'];
+        $pages = array_values(array_filter(array_map('strval', $m['lettre_pages']), function ($p) {
+            return is_file(__DIR__ . '/' . ltrim($p, '/'));
+        }));
+        if (!$pages) continue;
+        $photo = (string)($m['photo'] ?? ''); ?>
+      <li>
+        <a class="lettre" href="<?= e($pages[0]) ?>" data-lettre="<?= e(json_encode($pages, JSON_UNESCAPED_SLASHES)) ?>"
+           data-nom="<?= e($nom) ?>" data-suivi="lettre-<?= e(basename($pages[0], '-1.webp')) ?>">
+          <?php if ($photo !== '' && is_file(__DIR__ . '/' . ltrim($photo, '/'))): ?>
+          <img class="lettre__photo" src="<?= e($photo) ?>" alt="" width="56" height="56" loading="lazy" decoding="async">
+          <?php else: ?><span class="lettre__photo lettre__photo--vide" aria-hidden="true"><?= e(mb_substr($nom, 0, 1)) ?></span><?php endif; ?>
+          <span class="lettre__txt">
+            <b><?= e($nom) ?></b>
+            <span><?= e(c('lettres.lire', 'Lire la lettre')) ?> · <?= count($pages) ?> page<?= count($pages) > 1 ? 's' : '' ?></span>
+          </span>
+          <svg class="lettre__fleche" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+      </li>
+      <?php endforeach; ?>
+    </ul>
+
+    <?php if ($livretDispo): ?>
+    <p class="lettres__livret">
+      <a class="btn btn--dark" href="<?= e($livret) ?>" target="_blank" rel="noopener" data-suivi="lettres-livret">
+        <svg class="ico-doc" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 21h14"/></svg>
+        <?= e(c('lettres.bouton_livret')) ?>
+      </a>
+    </p>
+    <?php endif; ?>
+  </div>
+</section>
+
+<dialog class="lecteur" id="lecteur" aria-labelledby="lecteurNom">
+  <div class="lecteur__barre">
+    <p class="lecteur__nom" id="lecteurNom"></p>
+    <button class="lecteur__fermer" type="button" data-fermer aria-label="Fermer la lettre">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="lecteur__pages" id="lecteurPages" tabindex="0"></div>
+</dialog>
+<?php endif; ?>
 
 <section class="section section--support" id="soutien">
   <div class="wrap wrap--narrow">

@@ -1,7 +1,7 @@
 {
   "meta": {
     "titre": "CHAR 2026 — Ensemble, dans le respect et l'exigence",
-    "description": "Liste portée par Pierre Dehaen pour les élections du Club de Hockey Amateur de Rouen — 3 octobre 2026. Découvrez nos 10 priorités et soutenez le projet."
+    "description": "Dynamique portée par Pierre Dehaen pour les élections du Club de Hockey Amateur de Rouen — 3 octobre 2026. Découvrez nos 10 priorités et soutenez le projet."
   },
   "site": {
     "domaine": "https://char2026.fr/"
@@ -17,7 +17,7 @@
     "titre_ligne1": "Ensemble,",
     "titre_ligne2": "dans le respect",
     "titre_ligne3": "et l'exigence",
-    "chapo": "Une liste portée par <b>Pierre Dehaen</b> pour redonner <b>fierté, stabilité et ambition</b> au CHAR.",
+    "chapo": "Une dynamique portée par <b>Pierre Dehaen</b> et son équipe pour redonner <b>fierté, stabilité et ambition</b> au CHAR.",
     "cta_principal": "Je soutiens le projet",
     "cta_secondaire": "Voir les 10 priorités"
   },
@@ -46,6 +46,50 @@
     "Solidarité",
     "Performance"
   ],
+  "news": {
+    "surtitre": "News sur la situation",
+    "titre": "Où en est <em>l'élection</em> ?",
+    "texte": "L'Assemblée Générale Élective prévue le 3 octobre a été reportée par le Comité Directeur au <b>7 novembre 2026</b>, avec un nouvel appel à candidatures. En toute transparence, voici les courriers que nous avons adressés au club : un résumé pour chacun, et le document intégral si vous souhaitez le lire.",
+    "courriers": [
+      {
+        "date": "28 septembre 2026",
+        "titre": "Notre mise en demeure : réexaminer toutes les candidatures",
+        "resume": "Avant le scrutin du 3 octobre, nous avons demandé au Comité Directeur de vérifier la recevabilité de chaque candidature, selon les mêmes critères pour tous. Nous ne demandions ni le report ni l'annulation de l'élection.",
+        "points": [
+          "La date limite fixée par le club était le 16 septembre 2026, par recommandé avec accusé de réception et par e-mail.",
+          "D'après le classeur consulté au club le 26 septembre, certains recommandés ont été reçus après cette date.",
+          "Nous avons demandé de vérifier, pour chaque candidat : la date de réception, un dossier complet, la cotisation, la licence FFHG et la qualité de membre au 16 septembre.",
+          "Nous avons demandé une réponse écrite et motivée sous 48 heures."
+        ],
+        "fichier": "assets/documents/2026-09-28-mise-en-demeure.pdf",
+        "bouton": "Lire le courrier (4 pages)"
+      },
+      {
+        "date": "30 septembre 2026",
+        "titre": "La réponse du Comité Directeur",
+        "resume": "Dans un courrier diffusé à tous les licenciés, le Comité Directeur indique avoir appliqué trois critères à toutes les candidatures (adhésion, licence FFHG, preuve d'envoi dans le délai). « Dans un souci d'apaisement » et sans reconnaître d'irrégularité, il reporte l'élection au 7 novembre 2026 et ouvre un nouvel appel à candidatures.",
+        "points": [],
+        "fichier": "",
+        "bouton": ""
+      },
+      {
+        "date": "6 octobre 2026",
+        "titre": "Notre réponse au Comité Directeur",
+        "resume": "Nous prenons acte du report au 7 novembre, mais nous maintenons nos observations sur le déroulement du processus initial.",
+        "points": [
+          "Nous n'avons jamais demandé le report ni l'annulation de l'élection du 3 octobre.",
+          "La mise en demeure est venue après plusieurs demandes restées sans réponse et un accès refusé aux pièces des candidatures.",
+          "L'appel à candidatures n'exigeait pas de joindre la preuve d'envoi du recommandé : aucune condition ne doit être ajoutée après coup.",
+          "Le tableau transmis par le club laisse des informations non renseignées : dates de réception, pièces manquantes.",
+          "Pour nous, les candidatures à retenir restent celles de l'appel initial, examinées selon les règles annoncées à l'époque.",
+          "Nous demandons que les lettres de candidature soient accessibles à tous les électeurs, et que notre réponse soit diffusée comme celle du club."
+        ],
+        "fichier": "assets/documents/2026-10-06-reponse-au-comite.pdf",
+        "bouton": "Lire le courrier (9 pages)"
+      }
+    ],
+    "note": "L'annexe de notre réponse (tableau d'analyse des candidatures) n'est pas publiée en ligne, car elle contient des informations personnelles sur des candidats."
+  },
   "engagement": {
     "surtitre": "Notre engagement",
     "titre": "Redonner <em>fierté</em>, <em>stabilité</em><br>et <em>ambition</em> au CHAR",
@@ -197,7 +241,7 @@
   "liste": {
     "surtitre": "Notre liste",
     "titre": "Une équipe <em>diversifiée</em>,<br>complémentaire et passionnée",
-    "texte": "Treize licenciés, parents et bénévoles au service du club. Chacun apporte son métier, son expérience et son temps.",
+    "texte": "Douze licenciés, parents et bénévoles au service du club. Chacun apporte son métier, son expérience et son temps.",
     "membres": [
       {
         "nom": "Pierre DEHAEN",
@@ -208,7 +252,11 @@
           "ex-arbitre International",
           "2 enfants au CHAR"
         ],
-        "phrase": ""
+        "phrase": "Unissons nos forces pour faire grandir le club, fédérer les énergies et construire l'avenir ensemble.",
+        "lettre_pages": [
+          "assets/lettres/pierre-dehaen-1.webp",
+          "assets/lettres/pierre-dehaen-2.webp"
+        ]
       },
       {
         "nom": "Cédric BOULENGER",
@@ -217,7 +265,10 @@
           "Cadre informatique",
           "1 enfant au CHAR"
         ],
-        "phrase": ""
+        "phrase": "Accompagner mon enfant dans sa passion m’a permis de découvrir le club ; aujourd’hui, j’ai envie de donner de mon temps et de mon énergie pour le faire évoluer.",
+        "lettre_pages": [
+          "assets/lettres/cedric-boulenger-1.webp"
+        ]
       },
       {
         "nom": "Alexandre DY",
@@ -226,7 +277,10 @@
           "Directeur Cabinet",
           "Expert-Comptable"
         ],
-        "phrase": ""
+        "phrase": "Au service du sport, du collectif et de toutes les générations : je souhaite partager mes compétences et construire l’avenir du club.",
+        "lettre_pages": [
+          "assets/lettres/alexandre-dy-1.webp"
+        ]
       },
       {
         "nom": "Vincent GARNIER",
@@ -235,7 +289,10 @@
           "Responsable commercial",
           "Gardien de but du club"
         ],
-        "phrase": ""
+        "phrase": "Sur la glace comme dans mon métier, j’aime faire avancer les projets : aujourd’hui, je souhaite mettre cette énergie au service de mon club où j'évolue au poste de gardien chez les Loisirs.",
+        "lettre_pages": [
+          "assets/lettres/vincent-garnier-1.webp"
+        ]
       },
       {
         "nom": "David GAUDU",
@@ -244,16 +301,11 @@
           "Responsable de projets",
           "2 enfants au CHAR"
         ],
-        "phrase": ""
-      },
-      {
-        "nom": "Vincent GUILLAUME",
-        "photo": "assets/img/liste/vincent-guillaume.jpg",
-        "roles": [
-          "Médecin du sport",
-          "ex-staff équipe de France U20"
-        ],
-        "phrase": ""
+        "phrase": "Des actions concrètes, le sens du collectif, un lien renforcé avec les familles et une communication claire, transparente et efficace pour faire avancer le CHAR.",
+        "lettre_pages": [
+          "assets/lettres/david-gaudu-1.webp",
+          "assets/lettres/david-gaudu-2.webp"
+        ]
       },
       {
         "nom": "Valentin HAMEL",
@@ -263,7 +315,10 @@
           "Joueur du club",
           "1 enfant au CHAR"
         ],
-        "phrase": ""
+        "phrase": "Je souhaite contribuer à faire du CHAR un club dynamique, convivial, ambitieux et à l'écoute de ses licenciés.",
+        "lettre_pages": [
+          "assets/lettres/valentin-hamel-1.webp"
+        ]
       },
       {
         "nom": "Aurélie LECAT",
@@ -272,7 +327,11 @@
           "Gestionnaire d'entreprise",
           "1 enfant au CHAR"
         ],
-        "phrase": ""
+        "phrase": "Faisons de nos expériences une force collective. Ensemble, faisons grandir notre club.",
+        "lettre_pages": [
+          "assets/lettres/aurelie-lecat-1.webp",
+          "assets/lettres/aurelie-lecat-2.webp"
+        ]
       },
       {
         "nom": "Romain LECLERC",
@@ -282,7 +341,11 @@
           "Joueur du club",
           "1 enfant au CHAR"
         ],
-        "phrase": "Licencié à Rouen dès 1986, aujourd'hui parent, joueur loisir et bénévole au CHAR, je souhaite mettre mon expérience au service d'un projet collectif et ambitieux, pour faire grandir le club et en faire une fierté pour tous les licenciés."
+        "phrase": "Je souhaite mettre mon expérience au service d'un projet collectif et ambitieux, pour faire grandir le club et en faire une fierté pour tous les licenciés.",
+        "lettre_pages": [
+          "assets/lettres/romain-leclerc-1.webp",
+          "assets/lettres/romain-leclerc-2.webp"
+        ]
       },
       {
         "nom": "Eloïse LELOUP",
@@ -292,7 +355,10 @@
           "Responsable d'équipe",
           "1 enfant au CHAR"
         ],
-        "phrase": "S'investir pour le club, pour nos enfants et construire ensemble un projet qui nous ressemble."
+        "phrase": "S'investir pour le club, pour nos enfants et construire ensemble un projet qui nous ressemble.",
+        "lettre_pages": [
+          "assets/lettres/eloise-leloup-1.webp"
+        ]
       },
       {
         "nom": "Lucile MARTIN",
@@ -301,7 +367,11 @@
           "Cheffe de projets",
           "Joueuse du club"
         ],
-        "phrase": ""
+        "phrase": "Ensemble, faisons du CHAR un club ou chacun et chacun trouve sa place, un club ambitieux sur la glace, humain en dehors et dont nous pouvons tous être fiers.",
+        "lettre_pages": [
+          "assets/lettres/lucile-martin-1.webp",
+          "assets/lettres/lucile-martin-2.webp"
+        ]
       },
       {
         "nom": "Enguerrand THIBOUVILLE",
@@ -310,7 +380,10 @@
           "Conseiller bancaire",
           "Arbitre national"
         ],
-        "phrase": ""
+        "phrase": "Arbitre par passion, conseiller par métier, je souhaite mettre mon expérience au service de la formation de nos jeunes arbitres et de la transmission des valeurs d’éthique et de respect.",
+        "lettre_pages": [
+          "assets/lettres/enguerrand-thibouville-1.webp"
+        ]
       },
       {
         "nom": "David THOMAS",
@@ -320,9 +393,20 @@
           "Arbitre régional",
           "Ancien dirigeant au CHAR"
         ],
-        "phrase": ""
+        "phrase": "Ce club, je le connais et j’y suis profondément attaché. Aujourd’hui, j’ai envie de m’investir dans ce projet sérieux, de transmettre mon expérience et de contribuer à son développement.",
+        "lettre_pages": [
+          "assets/lettres/david-thomas-1.webp"
+        ]
       }
     ]
+  },
+  "lettres": {
+    "surtitre": "Lettres de candidature",
+    "titre": "Les femmes et les hommes <em>engagés</em><br>pour le CHAR",
+    "texte": "Pour voter en connaissance de cause, chacun doit pouvoir connaître les motivations des candidats. Voici nos lettres de candidature, en intégralité.",
+    "lire": "Lire la lettre",
+    "bouton_livret": "Télécharger toutes les lettres (PDF)",
+    "fichier_livret": "assets/lettres/lettres-de-candidature.pdf"
   },
   "soutien": {
     "surtitre": "Faisons avancer le CHAR",

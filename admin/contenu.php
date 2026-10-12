@@ -82,12 +82,14 @@ $titresBlocs = [
   'hero' => "Écran d'accueil",
   'compteur' => "Tableau d'affichage des soutiens",
   'bandeau_defilant' => 'Bandeau jaune défilant',
+  'news' => 'Section « News sur la situation » (courriers)',
   'engagement' => 'Section « Notre engagement »',
   'valeurs' => 'Section « Valeurs C·H·A·R »',
   'projet' => 'Section « 10 priorités »',
   'equipe' => 'Section « L\'équipe »',
   'soutien' => 'Section « Formulaire de soutien »',
-  'liste' => 'Section « Notre liste » (les 13 candidats)',
+  'liste' => 'Section « Notre liste » (les candidats)',
+  'lettres' => 'Section « Lettres de candidature »',
   'finale' => 'Bandeau jaune de fin',
   'pied' => 'Pied de page',
 ];
@@ -115,6 +117,10 @@ $libelles = [
   'base' => 'Bloc de gauche', 'email' => 'Adresse e-mail de contact',
   'programme_url' => 'Lien du programme', 'programme_libelle' => 'Libellé du lien',
   'liste' => 'Bloc « Liste »', 'mentions' => 'Mentions légales',
+  'courriers' => 'Les courriers (du plus ancien au plus récent)', 'date' => 'Date',
+  'resume' => 'Résumé', 'fichier' => 'Chemin du PDF (vide = pas de bouton)', 'note' => 'Note sous les courriers',
+  'lettre_pages' => 'Pages de la lettre de candidature (images)', 'lire' => 'Libellé « Lire la lettre »',
+  'bouton_livret' => 'Bouton du livret complet', 'fichier_livret' => 'Chemin du livret PDF',
 ];
 function lib(string $k, array $libelles): string
 {
