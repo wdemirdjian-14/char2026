@@ -1,7 +1,7 @@
 {
   "meta": {
     "titre": "CHAR 2026 — Ensemble, dans le respect et l'exigence",
-    "description": "Dynamique portée par Pierre Dehaen pour les élections du Club de Hockey Amateur de Rouen — 3 octobre 2026. Découvrez nos 10 priorités et soutenez le projet."
+    "description": "Dynamique portée par Pierre Dehaen pour les élections du Club de Hockey Amateur de Rouen — 7 novembre 2026. Découvrez nos 10 priorités et soutenez le projet."
   },
   "site": {
     "domaine": "https://char2026.fr/"
@@ -14,6 +14,8 @@
     "bandeau_court": "Élections du CHAR",
     "bandeau_long": "Élections du Club de Hockey Amateur de Rouen",
     "bandeau_date": "3 octobre 2026",
+    "nouvelle_date": "7 novembre 2026",
+    "tampon_libelle": "Reporté au",
     "titre_ligne1": "Ensemble,",
     "titre_ligne2": "dans le respect",
     "titre_ligne3": "et l'exigence",
@@ -38,7 +40,7 @@
     "periode": "1<sup>re</sup> période",
     "direct": "En direct",
     "afficher_objectif": false,
-    "ligne_basse": "Élections le 3 octobre 2026"
+    "ligne_basse": "Élections le 7 novembre 2026"
   },
   "bandeau_defilant": [
     "Respect",
@@ -429,7 +431,7 @@
     "bouton": "👍 Je soutiens le projet"
   },
   "pied": {
-    "base": "Club de Hockey Amateur de Rouen<br>Élections — 3 octobre 2026",
+    "base": "Club de Hockey Amateur de Rouen<br>Élections — 7 novembre 2026",
     "email": "ensemblepourlechar@gmail.com",
     "liste": "« Ensemble, dans le respect et l'exigence »<br>portée par Pierre Dehaen",
     "mentions": "© 2026 — Liste « Ensemble, dans le respect et l'exigence ». Site non officiel du club, publié dans le cadre de la campagne électorale."

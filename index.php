@@ -95,11 +95,17 @@ $POUCE = '<path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3m0 11V11m0 11h9.3a3 3
 
     <div class="hero__inner">
       <div class="hero__left">
-        <p class="hero__kicker reveal" data-reveal>
-          <span class="dot"></span>
-          <span class="k-short"><?= c('hero.bandeau_court') ?></span><span class="k-long"><?= c('hero.bandeau_long') ?></span>
-          — <b><?= c('hero.bandeau_date') ?></b>
-        </p>
+        <?php $nouvelleDate = trim(c('hero.nouvelle_date')); ?>
+        <div class="hero__dates reveal" data-reveal>
+          <p class="hero__kicker">
+            <span class="dot"></span>
+            <span class="k-short"><?= c('hero.bandeau_court') ?></span><span class="k-long"><?= c('hero.bandeau_long') ?></span>
+            — <?php if ($nouvelleDate !== ''): ?><del class="date-barree"><span class="sr">date annulée : </span><b><?= c('hero.bandeau_date') ?></b><i class="croix" aria-hidden="true"></i></del><?php else: ?><b><?= c('hero.bandeau_date') ?></b><?php endif; ?>
+          </p>
+          <?php if ($nouvelleDate !== ''): ?>
+          <p class="tampon"><span><?= e(c('hero.tampon_libelle', 'Reporté au')) ?></span><b><?= e($nouvelleDate) ?></b></p>
+          <?php endif; ?>
+        </div>
 
         <h1 class="hero__title">
           <span class="line"><span><?= c('hero.titre_ligne1') ?></span></span>

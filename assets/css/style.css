@@ -843,3 +843,49 @@ ul,ol{margin:0;padding:0;list-style:none}
   .lecteur{width:min(920px,94vw);height:94vh;margin:auto;border-radius:18px;overflow:hidden}
   .lecteur__pages{padding:20px 24px 28px}
 }
+
+/* =========================================================
+   DATE REPORTÉE — croix rouge en relief + tampon
+   ========================================================= */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hero__dates{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.date-barree{position:relative;display:inline-block;text-decoration:none}
+.date-barree b{color:rgba(255,255,255,.55);font-weight:700}
+.croix{position:absolute;left:-7%;right:-7%;top:-55%;bottom:-55%;pointer-events:none;
+  filter:drop-shadow(0 3px 3px rgba(0,0,0,.6))}
+.croix::before,.croix::after{content:"";position:absolute;left:0;right:0;top:50%;height:5px;margin-top:-2.5px;
+  border-radius:3px;transform-origin:50% 50%;
+  /* biseau : reflet en haut, ombre propre en bas, tranche foncée = relief */
+  background:linear-gradient(180deg,#ff8a7a 0%,#f2352a 32%,#c8150c 68%,#8e0a04 100%);
+  box-shadow:0 2px 0 #5e0402,inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(0,0,0,.25);
+  transform:rotate(var(--r)) scaleX(0);
+  animation:croixTrait .42s cubic-bezier(.3,1.4,.5,1) forwards}
+.croix::before{--r:17deg;animation-delay:1.25s}
+.croix::after{--r:-17deg;animation-delay:1.6s}
+@keyframes croixTrait{to{transform:rotate(var(--r)) scaleX(1)}}
+
+.tampon{--ink:var(--jaune);position:relative;margin:2px 0 0;display:inline-grid;justify-items:center;
+  padding:5px 13px 6px;color:var(--ink);border:2.5px solid var(--ink);border-radius:7px;
+  outline:1.5px solid var(--ink);outline-offset:3px;
+  font-family:var(--f-title);text-transform:uppercase;line-height:1;
+  transform:rotate(-7deg);opacity:0;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='110'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3.2 2.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='110'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3.2 2.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  -webkit-mask-size:260px 110px;mask-size:260px 110px;
+  animation:tamponFrappe .5s cubic-bezier(.2,.9,.3,1.25) 2.05s forwards}
+.tampon span{font-size:10.5px;font-weight:700;letter-spacing:.2em}
+.tampon b{font-size:clamp(20px,5.6vw,26px);font-weight:900;letter-spacing:.02em;margin-top:2px}
+@keyframes tamponFrappe{
+  0%  {opacity:0;transform:rotate(-16deg) scale(2.3)}
+  60% {opacity:.95;transform:rotate(-6deg) scale(.94)}
+  100%{opacity:.95;transform:rotate(-7deg) scale(1)}
+}
+@media (min-width:760px){
+  .croix::before,.croix::after{height:6px;margin-top:-3px}
+  .tampon{padding:6px 16px 7px}
+  .tampon span{font-size:11.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  .croix::before,.croix::after{animation:none;transform:rotate(var(--r))}
+  .tampon{animation:none;opacity:.95}
+}
